@@ -9,6 +9,7 @@
                 <input type="text" placeholder="请输入手机号" id="mobile" v-model="mobile">
                 <input type="text" placeholder="请输入验证码" id="verifyCodePic" >
                 <img src="../assets/register/VerifyImage.jpg">
+                <p1>aaaa</p1>
 
                 <input type="text" placeholder="登录密码" id="password" v-model="password">
                 <button v-on:click="inputRegister">注册</button>

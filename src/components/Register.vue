@@ -11,6 +11,7 @@
                 <img src="../assets/register/VerifyImage.jpg">
                 <p1>aaaa</p1>
                 <p1>aaaa</p1>
+                <p1>aaaa</p1>
 
                 <input type="text" placeholder="登录密码" id="password" v-model="password">
                 <button v-on:click="inputRegister">注册</button>

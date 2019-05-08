@@ -1,8 +1,7 @@
 <template>
     <div id="Hotel-register">
-        <div class="Hotel-register-nav">
-            <img src="../assets/merchant-register/GUET.png">
-        </div>
+        <merchant-nav></merchant-nav>
+
         <div class="Hotel-register-body">
             <h1>哪些房屋可以在途家网出租</h1>
                 <ul class="Hotel-type">
@@ -33,33 +32,23 @@
                 <li><img src="../assets/merchant-register/icon_s04.png"><br>详细的地址和周边的配套设施</li>
             </ul>
         </div>
+        <div class="wrap-lg">
+            <span>我已经准备好了！</span>
+            <a class="btn-primary-m" href="">发布中国大陆房屋</a>
+        </div>
 
 
 
     </div>
 </template>
-<script></script>
+<script>
+    import MerchantNav from "../components/merchantNav";
+    export default {
+        components: {MerchantNav}
+    }
+</script>
 <style scoped>
-    .Hotel-register-nav{
-        display: flex;
-        align-items: center;
-        height: 80px;
-        overflow: hidden;
-        background-color: #5264cc;
-    }
 
-    .Hotel-register-nav img{
-        width: 300px;
-        height: 50px;
-        margin-left: 200px;
-    }
-
-    .Hotel-register-nav h1{
-
-        font-size: 25px;
-        color: white;
-        margin-left: 300px;
-    }
 
     .Hotel-register-body{
         height: 500px;
@@ -147,6 +136,33 @@
 
     .Hotel-register-bottom .infoList>li img{
         padding-bottom: 20px;
+    }
+
+    .wrap-lg{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: rgba(7, 20, 37, 0.7);
+        height: 80px;
+    }
+
+    .wrap-lg span{
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        margin-left: 200px;
+        color: #fff;
+        font-size: 26px;
+        line-height: 80px;
+    }
+
+    .wrap-lg .btn-primary-m{
+        font-size: 16px;
+        height: 32px;
+        line-height: 32px;
+        color: #fff;
+        background-color: #6e80e3;
+        border: 1px white solid;
+        padding: 10px;
+        margin-left: 50%;
     }
 
 </style>

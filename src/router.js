@@ -5,6 +5,7 @@ import RegAndLog from '@/views/RegAndLog.vue'
 import UserRegister from '@/components/Register.vue'
 import UserLogin from "@/components/Login.vue"
 import HotelRegister from "@/views/HotelRegister.vue"
+import createUnitHouse from "@/views/createunitHouse.vue"
 
 
 Vue.use(Router)
@@ -42,8 +43,12 @@ export default new Router({
       path:'/merchant-web/store',
       name:'merchant-register',
       component:HotelRegister
+    },
+
+    { //开始发布房源具体信息
+      path:'/createunitHouse',
+      name:'createunitHouse',
+      component:createUnitHouse
     }
-
-
   ]
 })

@@ -1,16 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import merchantForm from './modules/merchantReg'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
+
+
+
 
 export default new Vuex.Store({
-  state: {
-
-  },
-  mutations: {
-
-  },
-  actions: {
-
+  modules:{
+    merchantForm
   }
 })

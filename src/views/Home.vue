@@ -145,6 +145,7 @@
     </div>
 
 
+
   </div>
 </template>
 
@@ -153,6 +154,7 @@
 
 
 export default {
+
   name: 'home',
   data:function(){
     return {
@@ -180,15 +182,16 @@ export default {
         password:this.password
       },
       r=>{
-
         console.log(r.data);
+      },
+      e=>{
+        console.log(e.data);
       })
     }
   }
-
-
 }
 </script>
+
 
 
 
@@ -379,3 +382,6 @@ export default {
 
 
   </style>
+=======
+<Style scoped></Style>
+>>>>>>> 13168ec624104253ce5b0f2cadedca4a9fabc8b6

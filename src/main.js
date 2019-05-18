@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 import api from './api/index.js'
 import apiConfig from './api/configs.js'
+import './plugins/element.js'
 
 Vue.config.productionTip = false
 

@@ -15,12 +15,12 @@ module.exports = {
 
   devServer: {
     proxy: {
-      '/wjd/app': {
-        target: 'http://192.168.1.102:8080/',
+      '/wjd': {
+        target: 'http://192.168.1.101:8080/',
         ws: true,
         changeOrigin: true
       }
     }
   }
-}
+};
 

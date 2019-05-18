@@ -54,6 +54,8 @@
                     password:this.password
                 },success=>{
                     console.log(success.data);
+                    localStorage.setItem("token",success.data.token);
+
                 },failure=>{
                     console.log("登录失败，失败原因：" + failure.data)
                 })

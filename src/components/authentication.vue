@@ -103,7 +103,7 @@
         data(){
             return {
                 labelPosition:'top',
-                requiredURL:'http://192.168.1.103:8090/',
+                requiredURL:'http://192.168.1.101:8090/',
                 UploadURL:this.$myconfig.photoUpLoad,
                 facilitys:facility2json,               //设施中英对照表
                 IdentityForm:{

@@ -35,6 +35,7 @@
                             :limit="1"
                             :on-success="handleBedSuccess"
                             :on-remove="removeBedSuccess"
+                            :before-upload="beforeAvatarUpload"
                     >
                         <i class="el-icon-plus"></i>
                     </el-upload>
@@ -58,6 +59,7 @@
                             :limit="1"
                             :on-success="handleBathSuccess"
                             :on-remove="removeBathSuccess"
+                            :before-upload="beforeAvatarUpload"
                     >
                         <i class="el-icon-plus"></i>
                     </el-upload>
@@ -81,6 +83,7 @@
                             :limit="2"
                             :on-success="handleOtherSuccess"
                             :on-remove="removeOtherSuccess"
+                            :before-upload="beforeAvatarUpload"
                     >
                         <i class="el-icon-plus"></i>
                     </el-upload>
@@ -103,7 +106,7 @@
         data(){
             return {
                 labelPosition:'top',
-                requiredURL:'http://192.168.1.103:8090/',
+                requiredURL:'http://192.168.1.101:8090/',
                 UploadURL:this.$myconfig.photoUpLoad,
                 PhotoForm:{
                     bedRoomPhoto:[],
@@ -135,6 +138,7 @@
             handleOtherSuccess(res,file,fileList){
 
                 var url = this.requiredURL+res.msg;
+
                 this.PhotoForm.OtherPhoto.push({name:file.name,url:url})
             },
             removeBedSuccess(file,fileList){
@@ -144,11 +148,11 @@
             },
             removeBathSuccess(file){
                 //this.PhotoForm.bathRoomPhoto = fileList
-                this.WhereRemoveFile(file.name,this.PhotoForm.bedRoomPhoto);
+                this.WhereRemoveFile(file.name,this.PhotoForm.bathRoomPhoto);
 
             },
             removeOtherSuccess(file){
-                this.WhereRemoveFile(file.name,this.PhotoForm.bedRoomPhoto);
+                this.WhereRemoveFile(file.name,this.PhotoForm.OtherPhoto);
 
             },
             WhereRemoveFile(name,List){
@@ -158,6 +162,26 @@
                     }
                 }
 
+            },
+            beforeAvatarUpload(file){
+                const isSize = new Promise(function(resolve, reject) {
+                    let width = 1440;
+                    let height = 1080;
+                    let _URL = window.URL || window.webkitURL;
+                    let img = new Image();
+                    img.onload = function() {
+                        let valid = img.width >= width && img.height >= height;
+                        valid ? resolve() : reject();
+                    }
+                    img.src = _URL.createObjectURL(file);
+                }).then(() => {
+                    return file;
+                }, () => {
+
+                    this.$message.error('上传的icon必须是等于或大于1440*1080!');
+                    return Promise.reject();
+                });
+                return isSize;
             }
         },
         created(){

@@ -6,6 +6,7 @@ import UserRegister from '@/components/Register.vue'
 import UserLogin from "@/components/Login.vue"
 import HotelRegister from "@/views/HotelRegister.vue"
 import createUnitHouse from "@/views/createunitHouse.vue"
+import ListDetail from '@/views/ListDetail.vue'
 
 
 Vue.use(Router)
@@ -49,6 +50,18 @@ export default new Router({
       path:'/createunitHouse',
       name:'createunitHouse',
       component:createUnitHouse
+    },
+
+    { //点击搜索后跳转的房屋列表
+      path:'/unitList',
+      name:'unitList',
+
+    },
+
+    {
+      path:'/detail/:hotelId',
+      name:'HotelDetail',
+      component:ListDetail
     }
   ]
 })

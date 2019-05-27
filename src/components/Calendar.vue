@@ -401,6 +401,8 @@
     .calendar{
         width: 360px;
         position: relative;
+        display: inline-block;
+
 
     }
     .calendar-input{

@@ -33,7 +33,10 @@
         </div>
 
       </div>
-         <search></search>
+      <div class="search-box">
+          <search></search>
+      </div>
+
       </div>
 
 
@@ -392,9 +395,13 @@ export default {
     padding-top:40px;
     background-color: #f7f7f7;
   }
+  .search-box{
+
+      display: flex;
+      justify-content: center;
+      margin-top:400px;
+  }
 
 
   </style>
-=======
-<Style scoped></Style>
->>>>>>> 13168ec624104253ce5b0f2cadedca4a9fabc8b6
+

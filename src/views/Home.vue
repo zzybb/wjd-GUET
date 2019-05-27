@@ -8,7 +8,7 @@
       <div class="header-content">
         <img :src="imgLogo" class="LogoPicture">
         <span class="hotelName">微酒店</span>
-        <span class="nav">
+        <span class="navHome">
           <span >
             <a href="" class="homePage">首页</a>
           </span>
@@ -31,9 +31,11 @@
           <option value="">看看每月挣多少？</option>
         </select>
         </div>
-      </div>
 
       </div>
+         <search></search>
+      </div>
+
 
 
       <div class="orderType">
@@ -135,27 +137,29 @@
         </div>
       </div>
 
-      <div class="footer">
+
+      <div class="checkMor">
         <input type="button" value="查看更多>>" class="checkMore">
       </div>
 
-
+      <div class="footer">
+        <h5>关于我们 | 我是房客 | 加入途家 | 网站地图</h5>
+        <h5>@2019 weijiudian 微酒店版权所有 京公网安备11010502027120 营业执照 安全保障计划 </h5>
+      </div>
 
 
     </div>
-
-
-
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
+import search from '../components/search';
 
 export default {
 
   name: 'home',
+  components:{search},
   data:function(){
     return {
       mobile:'',
@@ -197,11 +201,11 @@ export default {
 
 
 
-<style scoped>
+<style>
   .hotelName{
     font-size:30px;
     font-weight:700;
-    color:white;
+    color: #3e97e2;
     font-family:幼圆;
     letter-spacing: 3px;
   }
@@ -215,7 +219,7 @@ export default {
     padding-right:20px;
 
   }
-  .nav{
+  .navHome{
     padding-right:500px;
   }
   .selectBox {
@@ -260,7 +264,7 @@ export default {
   .header-content{
     width:1902px;
     height:60px;
-    background: rgba(116,107,108,.5);
+    background: rgba(255, 255, 255, 0.5);
 
   }
   .order{
@@ -348,7 +352,7 @@ export default {
 
   }
   .orderType{
-    margin-left:300px;
+    margin-left:310px;
 
 
   }
@@ -367,9 +371,9 @@ export default {
   .hotPlace{
     margin:10px 5px;
   }
-  .footer{
+  .checkMor{
     width:100%;
-    height:300px;
+    height:100px;
   }
   .checkMore{
     float:left;
@@ -378,7 +382,16 @@ export default {
     width:136px;
     height:36px;
   }
-
+  .footer{
+    text-align: center;
+    word-spacing: 1em;
+    line-height: 2em;
+    height:150px;
+    width:1920px;
+    margin:0;
+    padding-top:40px;
+    background-color: #f7f7f7;
+  }
 
 
   </style>

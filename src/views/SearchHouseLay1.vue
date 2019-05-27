@@ -1,0 +1,356 @@
+<template>
+    <div class="searchHouse">
+    <div class="header">
+        <slider></slider>
+    </div>
+        <img :src="advertise" calss="advertise">
+        <div>
+            <a href="/" class="back">微酒店  ></a>
+            <a href=""  class="back1">桂林公寓住房  ></a>
+        </div>
+    <div class="search">
+
+        <div class="nav">
+            <input type="text" placeholder="桂林" class="city">
+            <input type="text" readonly="readonly" class="check">
+            <input type="button" src="" value="搜索" class="choose">
+        </div>
+        <div>
+            <table>
+                <tr class="tab">
+                    <td>
+                        <span class="scope">房价</span>
+                            <label><input type="radio" name="housePrice" value="" class="tabPrice">￥0-200</label>
+                            <label><input type="radio" name="housePrice" value="" class="tabPrice">￥200-300</label>
+                            <label><input type="radio" name="housePrice" value="" class="tabPrice">￥300-400</label>
+                            <label><input type="radio" name="housePrice" value="" class="tabPrice">￥400-500</label>
+                            <label><input type="radio" name="housePrice" value="" class="tabPrice">￥500-800</label>
+                            <label><input type="radio" name="housePrice" value="" class="tabPrice">￥800-100000</label>
+                        <span>自定义  <input type="text" class="selfPrice">~<input type="text" class="selfPrice"></span>
+
+                    </td>
+                </tr>
+                <div class="hr"></div>
+                <tr class="tab">
+                    <td>
+                        <span class="scope">房型</span>
+
+                            <label><input type="radio" name="houseType" value="" class="tabPrice">公寓</label>
+                            <label><input type="radio" name="houseType" value="" class="tabPrice">别墅</label>
+                            <label><input type="radio" name="houseType" value="" class="tabPrice">复式</label>
+                            <label><input type="radio" name="houseType" value="" class="tabPrice">渔家乐</label>
+                            <label><input type="radio" name="houseType" value="" class="tabPrice">农家乐</label>
+                            <label><input type="radio" name="houseType" value="" class="tabPrice">木屋</label>
+                            <label><input type="radio" name="houseType" value="" class="tabPrice">竹屋</label>
+                            <label><input type="radio" name="houseType" value="" class="tabPrice">树屋</label>
+                    </td>
+                </tr>
+                <div class="hr"></div>
+            </table>
+
+        </div>
+
+    </div>
+    <div class="sec">
+        <table>
+            <tr>
+                <td class="select1">
+                    <img :src="sec01" class="sec01">
+                    <div>
+                        <div>
+                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
+                            <a> ￥599</a>
+                        </div>
+                        <div>
+                            <a>朝阳区</a>
+                        </div>
+                        <div>
+                            <span>1居/100平米/宜居5人</span>
+                            <a>5分/10条评论</a>
+                        </div>
+                    </div>
+                </td >
+                <td class="select1">
+                    <img :src="sec02" class="sec01">
+                    <div>
+                        <div>
+                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
+                            <a> ￥599</a>
+                        </div>
+                        <div>
+                            <a>朝阳区</a>
+                        </div>
+                        <div>
+                            <span>1居/100平米/宜居5人</span>
+                            <a>5分/10条评论</a>
+                        </div>
+                    </div>
+                </td>
+                <td class="select1">
+                    <img :src="sec03" class="sec01">
+                    <div>
+                        <div>
+                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
+                            <a> ￥599</a>
+                        </div>
+                        <div>
+                            <a>朝阳区</a>
+                        </div>
+                        <div>
+                            <span>1居/100平米/宜居5人</span>
+                            <a>5分/10条评论</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="select1">
+                    <img :src="sec04" class="sec01">
+                    <div>
+                        <div>
+                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
+                            <a> ￥599</a>
+                        </div>
+                        <div>
+                            <a>朝阳区</a>
+                        </div>
+                        <div>
+                            <span>1居/100平米/宜居5人</span>
+                            <a>5分/10条评论</a>
+                        </div>
+                    </div>
+                </td>
+                <td class="select1">
+                    <img :src="sec05" class="sec01">
+                    <div>
+                        <div>
+                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
+                            <a> ￥599</a>
+                        </div>
+                        <div>
+                            <a>朝阳区</a>
+                        </div>
+                        <div>
+                            <span>1居/100平米/宜居5人</span>
+                            <a>5分/10条评论</a>
+                        </div>
+                    </div>
+                </td>
+                <td class="select1">
+                    <img :src="sec06" class="sec01">
+                    <div>
+                        <div>
+                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
+                            <a> ￥599</a>
+                        </div>
+                        <div>
+                            <a>朝阳区</a>
+                        </div>
+                        <div>
+                            <span>1居/100平米/宜居5人</span>
+                            <a>5分/10条评论</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="select1">
+                    <img :src="sec07" class="sec01">
+                    <div>
+                        <div>
+                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
+                            <a> ￥599</a>
+                        </div>
+                        <div>
+                            <a>朝阳区</a>
+                        </div>
+                        <div>
+                            <span>1居/100平米/宜居5人</span>
+                            <a>5分/10条评论</a>
+                        </div>
+                    </div>
+                </td>
+                <td class="select1">
+                    <img :src="sec08" class="sec01">
+                    <div>
+                        <div>
+                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
+                            <a> ￥599</a>
+                        </div>
+                        <div>
+                            <a>朝阳区</a>
+                        </div>
+                        <div>
+                            <span>1居/100平米/宜居5人</span>
+                            <a>5分/10条评论</a>
+                        </div>
+                    </div>
+                </td>
+                <td class="select1">
+                    <img :src="sec09" class="sec01">
+                    <div>
+                        <div>
+                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
+                            <a> ￥599</a>
+                        </div>
+                        <div>
+                            <a>朝阳区</a>
+                        </div>
+                        <div>
+                            <span>1居/100平米/宜居5人</span>
+                            <a>5分/10条评论</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+    <div >
+        <undermost></undermost>
+    </div>
+    </div>
+</template>
+<script>
+    import slider from '../components/slider';
+    import undermost from '../components/undermost';
+    export default{
+        name: "SearchHouseLay1",
+        components:{slider ,undermost},
+        data:function(){
+            return{
+                advertise:require("../assets/searchHouseLay1/adv.jpg"),
+                sec01:require("../assets/searchHouseLay1/sec01.jpg"),
+                sec02:require("../assets/searchHouseLay1/sec02.jpg"),
+                sec03:require("../assets/searchHouseLay1/sec03.jpg"),
+                sec04:require("../assets/searchHouseLay1/sec04.jpg"),
+                sec05:require("../assets/searchHouseLay1/sec05.jpg"),
+                sec06:require("../assets/searchHouseLay1/sec06.jpg"),
+                sec07:require("../assets/searchHouseLay1/sec07.jpg"),
+                sec08:require("../assets/searchHouseLay1/sec08.jpg"),
+                sec09:require("../assets/searchHouseLay1/sec09.jpg"),
+            }
+        },
+        created() {
+            this.$api.get(this.$myconfig.hotelList,{
+                    "token":localStorage.getItem("token")
+                },
+                success=>{
+                    console.log(success.data);
+                    // localStorage.setItem("token",success.data.token);
+
+                },failure=>{
+                    console.log("登录失败，失败原因：" + failure.data.msg)
+                })
+        }
+
+    }
+
+</script>
+<style scoped>
+    .header{
+        position:relative;
+        width:100%;
+        height:60px;
+    }
+    .back{
+        display:inline-block;
+        width:100px;
+
+        margin-left:360px;
+        margin-top:30px;
+
+        color:black;
+    }
+    .back1{
+        margin-left:-50px;
+        color:black;
+
+    }
+    .searchHouse{
+        width:1920px;
+        height:100%;
+    }
+    .search{
+        width:1200px;
+        height:200px;
+        border:1px solid #dddddd;
+        margin-left:360px;
+        margin-top:40px ;
+    }
+    .nav{
+        width:1000px;
+        height:63px;
+        padding-right: 200px;
+        background-color: #b1c7d6;
+    }
+    .city {
+        display:inline-block;
+        width:300px;
+        height:30px;
+        margin-top:16px;
+        margin-left:50px;
+        padding-left:40px;
+        border:white;
+        background: white url("../assets/searchHouseLay1/searchLogo1.png") no-repeat;
+
+    }
+    .check{
+        display:inline-block;
+        width:300px;
+        height:30px;
+        margin-top:16px;
+        padding-left:40px;
+        border: white;
+        background: white url("../assets/searchHouseLay1/searchLogo2.png") no-repeat;
+    }
+    .choose{
+        display:inline-block;;
+        width:100px;
+        height:30px;
+        margin-top:16px;
+        margin-left:20px;
+        background-color: #3e97e2;
+        border: white;
+        font-size:14px;
+        color:white;
+        letter-spacing-spacing: 2em;
+    }
+    .tab{
+        height: 50px;
+    }
+    label{
+        display: inline-block;
+        width:100px;
+
+    }
+    .sec{
+        width:1193px;
+        height:1000px;
+        margin-left:360px;
+    }
+    .scope{
+        display:inline-block;
+        width:200px;
+        margin-left:40px;
+
+
+    }
+    .hr{
+        width:1200px;
+        border:1px solid #f7f7f7;
+    }
+    .selfPrice{
+        display:inline-block;
+        width:50px;
+    }
+    .sec01{
+        display:inline-block;
+        width:370px;
+        height:230px;
+        margin-right:40px;
+    }
+
+
+    </style>

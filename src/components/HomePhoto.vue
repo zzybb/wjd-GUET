@@ -106,7 +106,7 @@
         data(){
             return {
                 labelPosition:'top',
-                requiredURL:'http://192.168.1.101:8090/',
+                requiredURL:this.$myconfig.ImageURL,
                 UploadURL:this.$myconfig.photoUpLoad,
                 PhotoForm:{
                     bedRoomPhoto:[],
@@ -126,7 +126,6 @@
             },
             handleBedSuccess(res,file,fileList){
                 var url = this.requiredURL+res.msg;
-
                 this.PhotoForm.bedRoomPhoto.push({name:file.name,url:url})
 
             },

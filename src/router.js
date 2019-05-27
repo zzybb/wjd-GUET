@@ -7,7 +7,7 @@ import UserLogin from "@/components/Login.vue"
 import HotelRegister from "@/views/HotelRegister.vue"
 import createUnitHouse from "@/views/createunitHouse.vue"
 import ListDetail from '@/views/ListDetail.vue'
-
+import calendar from '@/components/Calendar.vue'
 
 Vue.use(Router)
 
@@ -58,10 +58,15 @@ export default new Router({
 
     },
 
-    {
+    { //
       path:'/detail/:hotelId',
       name:'HotelDetail',
       component:ListDetail
+    },
+
+    { //测试用路由（不要管这个）
+      path:'/test',
+      component:calendar
     }
   ]
 })

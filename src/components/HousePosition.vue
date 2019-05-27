@@ -82,7 +82,6 @@
                 locationObj:self.PositionForm
             };
         },
-
     }
 </script>
 

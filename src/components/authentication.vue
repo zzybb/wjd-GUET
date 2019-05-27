@@ -250,7 +250,7 @@
             ReorganPrice(obj){
                 var Form = JSON.parse(localStorage.getItem("PriceForm"));
                 var Price = {
-                    "price":Form.price,
+                    "price":parseInt(Form.price),
                     "deposit":Form.deposit
                 }
 

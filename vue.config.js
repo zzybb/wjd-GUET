@@ -15,10 +15,18 @@ module.exports = {
 
   devServer: {
     proxy: {
-      '/wjd': {
-        target: 'http://192.168.1.101:8080/',
+      '/wjd': { //后台接口
+        target: 'http://192.168.1.100:8080/',
         ws: true,
         changeOrigin: true
+      },
+      '/image':{ //图片服务器地址
+        target: 'http://192.168.1.100:8090/',
+        ws:true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/image':''
+        }
       }
     }
   }

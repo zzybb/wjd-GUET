@@ -61,7 +61,6 @@
         data(){
             return{
 
-
                 stepContent:[
                     {
                         name:'房屋位置',
@@ -99,15 +98,14 @@
             }
         },
         mounted(){
-
-                var currentId = parseInt(localStorage.getItem("currentId")),
-                    FormCompleteId = JSON.parse(localStorage.getItem("FormCompleteId")),
-                    writingId = parseInt(localStorage.getItem("writingId"));
-                if (FormCompleteId != null){
-                    this.changeCurrentId(currentId);
-                    this.changeFormCompleteId(FormCompleteId);
-                    this.changeWritingId(writingId);
-                }
+            var currentId = parseInt(localStorage.getItem("currentId")),
+                FormCompleteId = JSON.parse(localStorage.getItem("FormCompleteId")),
+                writingId = parseInt(localStorage.getItem("writingId"));
+            if (FormCompleteId != null){
+                this.changeCurrentId(currentId);
+                this.changeFormCompleteId(FormCompleteId);
+                this.changeWritingId(writingId);
+            }
         },
         methods:{
             ...mapMutations({
@@ -145,8 +143,6 @@
     .step-content ul{
         box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px 0 rgba(63,63,68,.15);
         margin-bottom: 10px;
-
-
     }
     .step-content ul>li{
         height: 40px;

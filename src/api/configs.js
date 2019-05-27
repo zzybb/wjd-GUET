@@ -2,6 +2,7 @@
  * 放置后端接口
  */
 export default {
+
   ImageURL:'http://192.168.1.101:8090/',       //图片服务器地址
   register:'/register',                        // 用户注册
   userLogin:'/login',                          // 用户登录
@@ -9,4 +10,5 @@ export default {
   hotelSave:'/hotel/save',                     // 酒店最终提交
   hotelList:'/hotel/list',                     // 获取房屋列表
   hotelDetail:'hotel/info/',                   // 房屋详情
+
 }

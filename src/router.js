@@ -8,6 +8,9 @@ import HotelRegister from "@/views/HotelRegister.vue"
 import createUnitHouse from "@/views/createunitHouse.vue"
 import ListDetail from '@/views/ListDetail.vue'
 import calendar from '@/components/Calendar.vue'
+import SearchHouseLay1 from '@/views/SearchHouseLay1.vue'
+
+
 
 Vue.use(Router)
 
@@ -55,6 +58,8 @@ export default new Router({
     { //点击搜索后跳转的房屋列表
       path:'/unitList',
       name:'unitList',
+      component:SearchHouseLay1
+
 
     },
 

@@ -1,17 +1,19 @@
 <template>
-    <div class="search">
-    <div class="nav">
-        <input type="text" placeholder="桂林" class="city" v-model="palceName" >
-        <input type="text" readonly="readonly" class="check" style="width:300px;height:30px;">
-        <input type="button" src="" value="搜索" class="choose" @click="showSearchLay1">
-    </div>
+    <div class="searchBox">
+        <div class="nav">
+            <input type="text" placeholder="桂林" class="city" v-model="palceName" >
+            <Calendar></Calendar>
+            <input type="button" src="" value="搜索" class="choose" @click="showSearchLay1">
+        </div>
     </div>
 
 </template>
 <script>
 
+    import Calendar from "./Calendar";
     export  default {
         name: "search",
+        components: {Calendar},
         data(){
             return {
                 palceName:[]
@@ -31,20 +33,28 @@
     </script>
 <style>
     .nav{
-        width:900px;
+        width:770px;
         height:63px;
-        padding-right: 200px;
-        background-color: #b1c7d6;
+
+
+
+        display: flex;
+        align-items: center;
+
+
+
     }
     .city {
         display:inline-block;
         width:300px;
-        height:30px;
-        margin-top:16px;
-        margin-left:50px;
+        height:44px;
+        border: 1px solid #e9e9e9;
+        -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+        transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
         padding-left:40px;
-        border:white;
-        background: white url("../assets/searchHouseLay1/searchLogo1.png") no-repeat;
+        background:white url("../assets/searchHouseLay1/searchLogo1.png") no-repeat left 50%;
 
     }
     .check{
@@ -52,27 +62,27 @@
         /*width:300px;*/
         height:10px;
         margin-top:16px;
-        padding-left:40px;
+
         border: white;
         background: white url("../assets/searchHouseLay1/searchLogo2.png") no-repeat;
     }
     .choose{
         display:inline-block;;
         width:100px;
-        height:30px;
-        margin-top:16px;
-        margin-left:20px;
+        height:44px;
         background-color: #3e97e2;
         border: white;
         font-size:14px;
         color:white;
         letter-spacing-spacing: 2em;
     }
-    .search{
-        width:1500px;
-        height:200px;
-        border: #ffffff ;
-        margin-left:360px;
-        margin-top:400px ;
+    .searchBox{
+        margin-top: 10px;
+        width:770px;
+    }
+
+    .calendar-input{
+        border-radius:0 !important;
+
     }
 </style>

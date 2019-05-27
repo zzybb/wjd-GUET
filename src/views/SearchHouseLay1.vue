@@ -9,12 +9,10 @@
             <a href=""  class="back1">桂林公寓住房  ></a>
         </div>
     <div class="search">
+         <div class="search-border">
+             <search></search>
+         </div>
 
-        <div class="nav">
-            <input type="text" placeholder="桂林" class="city">
-            <input type="text" readonly="readonly" class="check">
-            <input type="button" src="" value="搜索" class="choose">
-        </div>
         <div>
             <table>
                 <tr class="tab">
@@ -215,9 +213,10 @@
 <script>
     import slider from '../components/slider';
     import undermost from '../components/undermost';
+    import Search from "../components/search";
     export default{
         name: "SearchHouseLay1",
-        components:{slider ,undermost},
+        components:{Search, slider ,undermost},
         data:function(){
             return{
                 advertise:require("../assets/searchHouseLay1/adv.jpg"),
@@ -274,48 +273,13 @@
     }
     .search{
         width:1200px;
-        height:200px;
-        border:1px solid #dddddd;
-        margin-left:360px;
-        margin-top:40px ;
+        margin: 0 auto;
     }
-    .nav{
-        width:1000px;
-        height:63px;
-        padding-right: 200px;
-        background-color: #b1c7d6;
-    }
-    .city {
-        display:inline-block;
-        width:300px;
-        height:30px;
-        margin-top:16px;
-        margin-left:50px;
-        padding-left:40px;
-        border:white;
-        background: white url("../assets/searchHouseLay1/searchLogo1.png") no-repeat;
+    .search-border{
 
-    }
-    .check{
-        display:inline-block;
-        width:300px;
-        height:30px;
-        margin-top:16px;
-        padding-left:40px;
-        border: white;
-        background: white url("../assets/searchHouseLay1/searchLogo2.png") no-repeat;
-    }
-    .choose{
-        display:inline-block;;
-        width:100px;
-        height:30px;
-        margin-top:16px;
-        margin-left:20px;
-        background-color: #3e97e2;
-        border: white;
-        font-size:14px;
-        color:white;
-        letter-spacing-spacing: 2em;
+        padding-left: 40px;
+
+        background: #b1c7d6;
     }
     .tab{
         height: 50px;
@@ -327,6 +291,7 @@
     }
     .sec{
         width:1193px;
+
         height:1000px;
         margin-left:360px;
     }

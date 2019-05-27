@@ -7,11 +7,9 @@
             <div class="icon-2-nav">
                 <div class="icon-container-nav">
                     <ul>
-                        <li><a>房屋介绍</a></li>
-                        <li><a>交易规则</a></li>
-                        <li><a>入住须知</a></li>
-                        <li><a>额外费用</a></li>
-                        <li><a>房屋点评</a></li>
+                        <li><a href="#house_description">房屋介绍</a></li>
+                        <li><a href="#trading_rules">交易规则</a></li>
+                        <li><a href="#Check-in_instructions">入住须知</a></li>
                     </ul>
                 </div>
             </div>
@@ -45,13 +43,13 @@
 
                             </ul>
                         </div>
-                        <div class="unit-layout__item">
+                        <div class="unit-layout__item" id="house_description">
                             <h5>房屋描述</h5>
                             <div class="unit-description simple">
                                 {{DetailForm.HouseDescription}}
                             </div>
                         </div>
-                        <div class="unit-layout__item">
+                        <div class="unit-layout__item" id="Facility_service">
                             <h5>设施服务</h5>
                             <div class="unit-facilities">
                                 <ul>
@@ -70,11 +68,11 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="unit-layout__item">
+                        <div class="unit-layout__item" id="house_position">
                             <h5>房屋位置</h5>
 
                         </div>
-                        <div class="unit-layout__item">
+                        <div class="unit-layout__item" id="trading_rules">
                             <div class="rule-intro">
                                 <h5>交易规则<span class="rule-transaction-icon">此规则由房东制定</span></h5>
                                 <p>付款方式： 全额预付房费</p>
@@ -83,7 +81,7 @@
                             </div>
 
                         </div>
-                        <div class="unit-layout__item">
+                        <div class="unit-layout__item" id="Check-in_instructions">
                             <div class="rule-intro">
                                 <h5>入住须知</h5>
                                 <ul>
@@ -137,8 +135,11 @@
                         <span class="price__count">549</span>
                         每晚
                     </div>
-
+                    <div class="calendar">
                         <Calendar v-on:getDate="getDate($event)"></Calendar>
+                    </div>
+
+
 
                     <button class="common__button">
                         <span class="common__button_price">立刻预订（5晚¥2790）</span>
@@ -567,7 +568,7 @@
         outline: none;
         border: 0;
         font-size: 16px;
-        margin: 0;
+        margin-top: 20px;
         color: #fff;
 
     }
@@ -577,6 +578,9 @@
         display: inline-block;
         font-family: PingFangSC-Medium;
         letter-spacing: 0;
+    }
+    .calendar{
+        margin-top: 20px;
     }
     .tj-input__inner{
         -webkit-appearance: none;

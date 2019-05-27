@@ -3,6 +3,7 @@
     <div class="header">
         <slider></slider>
     </div>
+        <p>ABC</p>
         <img :src="advertise" calss="advertise">
         <div>
             <a href="/" class="back">微酒店  ></a>

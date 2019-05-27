@@ -189,7 +189,7 @@
     .rule-of-house{
         float: right;
         position: relative;
-        width: 1049px;
+        width: 1050px;
         border-radius: 2px;
         box-shadow: 0 0 0 1px rgba(63,63,68,.05), 0 1px 3px 0 rgba(63,63,68,.15);
         padding-bottom: 20px;

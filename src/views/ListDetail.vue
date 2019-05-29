@@ -1,10 +1,18 @@
 <template>
     <div class="list-detail">
+        <div>
+            <slider></slider>
+        </div>
         <div class="top-image">
-            <img :src="Image1src" class="first-image">
+            <el-carousel indicator-position="outside"  height="590px">
+                <el-carousel-item v-for="item in DetailForm.HotelImageList" :key="item">
+                    <img :src="item" class="first-image">
+
+                </el-carousel-item>
+            </el-carousel>
         </div>
 
-            <div class="icon-2-nav">
+            <div class="icon-2-nav" :class="[searchBarFixed ? 'searchBarFixed':'']">
                 <div class="icon-container-nav">
                     <ul>
                         <li><a href="#house_description">房屋介绍</a></li>
@@ -129,10 +137,10 @@
                     </div>
 
                 </div>
-                <div class="icon-2-body-right">
+                <div class="icon-2-body-right" :class="[searchBarFixed ? 'searchBarFixed2':'']">
                     <div class="unit-price__price">
                         <span>￥</span>
-                        <span class="price__count">549</span>
+                        <span class="price__count">{{DetailForm.price}}</span>
                         每晚
                     </div>
                     <div class="calendar">
@@ -142,7 +150,7 @@
 
 
                     <button class="common__button">
-                        <span class="common__button_price">立刻预订（5晚¥2790）</span>
+                        <span class="common__button_price">立刻预订（{{SelectDate.nightNum}}晚¥{{(SelectDate.nightNum * DetailForm.price) || 0}}）</span>
                     </button>
 
                 </div>
@@ -156,21 +164,20 @@
 <script>
     import BottomNav from "../components/bottomNav";
     import Calendar from "../components/Calendar";
+    import Slider from "../components/slider";
 
     export default {
         name: "ListDetail",
         components:{
+            Slider,
             Calendar,
             BottomNav
         },
         data(){
             return {
                 Image1src:'',
-                InTime:'',
-                OutTime:'',
-                InCalendar:false,
-                OutCalendar:false,
-                completeData:true,
+                SelectDate:'',
+                searchBarFixed:false,
                 DetailForm:{
                     HouseName:'',
                     address:'',
@@ -183,6 +190,8 @@
                     HouseDescription: '',
                     deposit:'',
                     hotelRule:'',
+                    HotelImageList:[]
+
                 },
                 ServiceList:[
                     {
@@ -284,10 +293,12 @@
                 ]
             }
         },
-
+        mounted(){
+            window.addEventListener('scroll', this.handleScroll)
+        },
         created() {
 
-            this.$api.get(this.$myconfig.hotelDetail + '6',{
+            this.$api.get(this.$myconfig.hotelDetail + this.$route.params.hotelId,{
                 "token":localStorage.getItem("token")
             },r=>{
                 console.log(r.data);
@@ -304,12 +315,23 @@
                     fitNum:data.suitablePopulation,
                     HouseDescription:data.feature,
                     deposit:data.deposit,
-                    hotelRule:data.hotelRule
+                    hotelRule:data.hotelRule,
+                    price:data.price,
+                    HotelImageList:[
+                        this.$myconfig.ImageURL + data.hotelImage1,
+                        this.$myconfig.ImageURL + data.hotelImage2,
+                        this.$myconfig.ImageURL + data.hotelImage3,
+                        this.$myconfig.ImageURL + data.hotelImage4
+                    ]
                 };
                 this.ServicePush(data.facilityService);
             },e=>{
-                console.log(e.data);
+                console.log(e);
             });
+
+            if (localStorage.getItem("SelectDate")){
+                this.SelectDate = JSON.parse(localStorage.getItem("SelectDate"));
+            }
         },
         methods:{
             ServicePush(data){
@@ -322,8 +344,12 @@
                 }
             },
             getDate(event){
-                console.log(event);
-
+                this.SelectDate = event;
+            },
+            handleScroll(){
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                let offsetTop = document.querySelector('.icon-2-nav').offsetTop;
+                scrollTop > offsetTop ? this.searchBarFixed = true : this.searchBarFixed = false;
             }
         }
     }
@@ -336,6 +362,7 @@
 
     .top-image{
         width: 100%;
+
 
         height: 590px;
     }
@@ -355,6 +382,7 @@
         min-width: 1280px;
         background: #fff;
         box-shadow: 0 1px 3px 0 rgba(0,0,0,.05);
+
 
         overflow: hidden;
     }
@@ -380,6 +408,7 @@
         color: #333;
     }
     .icon-2-body{
+
         position: relative;
         width: 1250px;
         margin: 0 auto;
@@ -481,12 +510,12 @@
         clear: both;
     }
     .icon-2-body-right{
+
         width: 360px;
         position: relative;
         margin-top: 30px;
         float: right;
         z-index: 1;
-
         padding: 30px;
         background-color: white;
     }
@@ -581,6 +610,18 @@
     }
     .calendar{
         margin-top: 20px;
+    }
+    .searchBarFixed{
+        position: fixed;
+        top:0;
+        z-index:999;
+    }
+    .searchBarFixed2{
+        position:fixed;
+        left: 60.8%;
+
+        top:86px;
+        z-index: 999;
     }
     .tj-input__inner{
         -webkit-appearance: none;

@@ -330,6 +330,7 @@
                 }
                 var strObj = JSON.stringify(this.SelectDate);
                 localStorage.setItem("SelectDate",strObj);
+
                 if (this.SelectDate.currAttr == "complete") {
                     this.isShow = false;
                 }

@@ -302,6 +302,7 @@
                         }else{
                             this.SelectDate.EndTime = date;
                             this.SelectDate.currAttr = "complete";
+                            this.SelectDate.nightNum = this.datedifference(this.SelectDate.BeganTime,this.SelectDate.EndTime);
                             this.$emit("getDate",this.SelectDate);
                         }
                     }
@@ -373,6 +374,7 @@
                 return date;
             },
             datedifference(sDate1, sDate2){   //计算两个日期之间的天数
+                console.log(sDate1,sDate2);
                 var dateSpan,
                     iDays;
                 sDate1 = Date.parse(sDate1);

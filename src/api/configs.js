@@ -3,7 +3,7 @@
  */
 export default {
 
-  ImageURL:'http://192.168.1.101:8090/',       //图片服务器地址
+  ImageURL:'http://192.168.1.102:8090/',       //图片服务器地址
   register:'/register',                        // 用户注册
   userLogin:'/login',                          // 用户登录
   photoUpLoad:'/wjd/upload',                   // 上传图片(element ui专用)

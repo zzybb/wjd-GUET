@@ -50,159 +50,171 @@
 
     </div>
     <div class="sec">
-        <table>
-            <tr>
-                <td class="select1">
-                    <img :src="sec01" class="sec01">
-                    <div>
-                        <div>
-                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
-                            <a> ￥599</a>
-                        </div>
-                        <div>
-                            <a>朝阳区</a>
-                        </div>
-                        <div>
-                            <span>1居/100平米/宜居5人</span>
-                            <a>5分/10条评论</a>
-                        </div>
-                    </div>
-                </td >
-                <td class="select1">
-                    <img :src="sec02" class="sec01">
-                    <div>
-                        <div>
-                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
-                            <a> ￥599</a>
-                        </div>
-                        <div>
-                            <a>朝阳区</a>
-                        </div>
-                        <div>
-                            <span>1居/100平米/宜居5人</span>
-                            <a>5分/10条评论</a>
-                        </div>
-                    </div>
-                </td>
-                <td class="select1">
-                    <img :src="sec03" class="sec01">
-                    <div>
-                        <div>
-                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
-                            <a> ￥599</a>
-                        </div>
-                        <div>
-                            <a>朝阳区</a>
-                        </div>
-                        <div>
-                            <span>1居/100平米/宜居5人</span>
-                            <a>5分/10条评论</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="select1">
-                    <img :src="sec04" class="sec01">
-                    <div>
-                        <div>
-                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
-                            <a> ￥599</a>
-                        </div>
-                        <div>
-                            <a>朝阳区</a>
-                        </div>
-                        <div>
-                            <span>1居/100平米/宜居5人</span>
-                            <a>5分/10条评论</a>
-                        </div>
-                    </div>
-                </td>
-                <td class="select1">
-                    <img :src="sec05" class="sec01">
-                    <div>
-                        <div>
-                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
-                            <a> ￥599</a>
-                        </div>
-                        <div>
-                            <a>朝阳区</a>
-                        </div>
-                        <div>
-                            <span>1居/100平米/宜居5人</span>
-                            <a>5分/10条评论</a>
-                        </div>
-                    </div>
-                </td>
-                <td class="select1">
-                    <img :src="sec06" class="sec01">
-                    <div>
-                        <div>
-                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
-                            <a> ￥599</a>
-                        </div>
-                        <div>
-                            <a>朝阳区</a>
-                        </div>
-                        <div>
-                            <span>1居/100平米/宜居5人</span>
-                            <a>5分/10条评论</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="select1">
-                    <img :src="sec07" class="sec01">
-                    <div>
-                        <div>
-                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
-                            <a> ￥599</a>
-                        </div>
-                        <div>
-                            <a>朝阳区</a>
-                        </div>
-                        <div>
-                            <span>1居/100平米/宜居5人</span>
-                            <a>5分/10条评论</a>
-                        </div>
-                    </div>
-                </td>
-                <td class="select1">
-                    <img :src="sec08" class="sec01">
-                    <div>
-                        <div>
-                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
-                            <a> ￥599</a>
-                        </div>
-                        <div>
-                            <a>朝阳区</a>
-                        </div>
-                        <div>
-                            <span>1居/100平米/宜居5人</span>
-                            <a>5分/10条评论</a>
-                        </div>
-                    </div>
-                </td>
-                <td class="select1">
-                    <img :src="sec09" class="sec01">
-                    <div>
-                        <div>
-                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>
-                            <a> ￥599</a>
-                        </div>
-                        <div>
-                            <a>朝阳区</a>
-                        </div>
-                        <div>
-                            <span>1居/100平米/宜居5人</span>
-                            <a>5分/10条评论</a>
-                        </div>
-                    </div>
-                </td>
-            </tr>
+<!--        <table>-->
+<!--            <tr>-->
+<!--                <td class="select1">-->
+<!--                    <img :src="sec01" class="sec01">-->
+<!--                    <div>-->
+<!--                        <div>-->
+<!--                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>-->
+<!--                            <a> ￥599</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <a>朝阳区</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <span>1居/100平米/宜居5人</span>-->
+<!--                            <a>5分/10条评论</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </td >-->
+<!--                <td class="select1">-->
+<!--                    <img :src="sec02" class="sec01">-->
+<!--                    <div>-->
+<!--                        <div>-->
+<!--                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>-->
+<!--                            <a> ￥599</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <a>朝阳区</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <span>1居/100平米/宜居5人</span>-->
+<!--                            <a>5分/10条评论</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="select1">-->
+<!--                    <img :src="sec03" class="sec01">-->
+<!--                    <div>-->
+<!--                        <div>-->
+<!--                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>-->
+<!--                            <a> ￥599</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <a>朝阳区</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <span>1居/100平米/宜居5人</span>-->
+<!--                            <a>5分/10条评论</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--&lt;!&ndash;            <tr>&ndash;&gt;-->
+<!--                <td class="select1">-->
+<!--                    <img :src="sec04" class="sec01">-->
+<!--                    <div>-->
+<!--                        <div>-->
+<!--                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>-->
+<!--                            <a> ￥599</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <a>朝阳区</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <span>1居/100平米/宜居5人</span>-->
+<!--                            <a>5分/10条评论</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="select1">-->
+<!--                    <img :src="sec05" class="sec01">-->
+<!--                    <div>-->
+<!--                        <div>-->
+<!--                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>-->
+<!--                            <a> ￥599</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <a>朝阳区</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <span>1居/100平米/宜居5人</span>-->
+<!--                            <a>5分/10条评论</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="select1">-->
+<!--                    <img :src="sec06" class="sec01">-->
+<!--                    <div>-->
+<!--                        <div>-->
+<!--                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>-->
+<!--                            <a> ￥599</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <a>朝阳区</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <span>1居/100平米/宜居5人</span>-->
+<!--                            <a>5分/10条评论</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td class="select1">-->
+<!--                    <img :src="sec07" class="sec01">-->
+<!--                    <div>-->
+<!--                        <div>-->
+<!--                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>-->
+<!--                            <a> ￥599</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <a>朝阳区</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <span>1居/100平米/宜居5人</span>-->
+<!--                            <a>5分/10条评论</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="select1">-->
+<!--                    <img :src="sec08" class="sec01">-->
+<!--                    <div>-->
+<!--                        <div>-->
+<!--                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>-->
+<!--                            <a> ￥599</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <a>朝阳区</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <span>1居/100平米/宜居5人</span>-->
+<!--                            <a>5分/10条评论</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--                <td class="select1">-->
+<!--                    <img :src="sec09" class="sec01">-->
+<!--                    <div>-->
+<!--                        <div>-->
+<!--                            <a>豪华公寓J3-长安街故宫国贸家庭公寓</a>-->
+<!--                            <a> ￥599</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <a>朝阳区</a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <span>1居/100平米/宜居5人</span>-->
+<!--                            <a>5分/10条评论</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </td>-->
+<!--            </tr>-->
 
-        </table>
+<!--        </table>-->
+        <div class="">
+            <ul>
+                <li v-for="item in list">
+                    <a><img v-bind:src="item.hotelImage1">
+                        <div>{{item.name}}}</div>
+                        <div>{{item.price}}}</div>
+                        <div>{{item.street}}}</div>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
 
     </div>
     <div >
@@ -220,29 +232,39 @@
         data:function(){
             return{
                 advertise:require("../assets/searchHouseLay1/adv.jpg"),
-                sec01:require("../assets/searchHouseLay1/sec01.jpg"),
-                sec02:require("../assets/searchHouseLay1/sec02.jpg"),
-                sec03:require("../assets/searchHouseLay1/sec03.jpg"),
-                sec04:require("../assets/searchHouseLay1/sec04.jpg"),
-                sec05:require("../assets/searchHouseLay1/sec05.jpg"),
-                sec06:require("../assets/searchHouseLay1/sec06.jpg"),
-                sec07:require("../assets/searchHouseLay1/sec07.jpg"),
-                sec08:require("../assets/searchHouseLay1/sec08.jpg"),
-                sec09:require("../assets/searchHouseLay1/sec09.jpg"),
+                list:[]
+
+                // sec01:require("../assets/searchHouseLay1/sec01.jpg"),
+                // sec02:require("../assets/searchHouseLay1/sec02.jpg"),
+                // sec03:require("../assets/searchHouseLay1/sec03.jpg"),
+                // sec04:require("../assets/searchHouseLay1/sec04.jpg"),
+                // sec05:require("../assets/searchHouseLay1/sec05.jpg"),
+                // sec06:require("../assets/searchHouseLay1/sec06.jpg"),
+                // sec07:require("../assets/searchHouseLay1/sec07.jpg"),
+                // sec08:require("../assets/searchHouseLay1/sec08.jpg"),
+                // sec09:require("../assets/searchHouseLay1/sec09.jpg"),
             }
         },
+
+
         created() {
+            var select = JSON.parse(localStorage.getItem("SelectDate"));
             this.$api.get(this.$myconfig.hotelList,{
-                    "token":localStorage.getItem("token")
+                "token":localStorage.getItem("token"),
+                "city":localStorage.getItem("palceName"),
+                "selectStartDate":select.BeganTime,
+                "selectEndDate":select.EndTime
+
                 },
                 success=>{
-                    console.log(success.data);
+                    console.log("___________",success.data.page.list);
+                    this.list=success.data.page.list
                     // localStorage.setItem("token",success.data.token);
 
                 },failure=>{
                     console.log("登录失败，失败原因：" + failure.data.msg)
                 })
-        }
+        },
 
     }
 

@@ -26,7 +26,7 @@
                                @click="submitForm">保存</el-button>
                 </div>-->
             </div >
-            <div class="item-content detail" v-if="currentId == 2" >
+            <div class="item-content Home-detail" v-if="currentId == 2" >
                 <div class="detail">
                     <el-form :model="DetailForm" ref="DetailForm" :rules="rules">
                         <el-form-item label="出租类型" prop="TypeOfRental">
@@ -46,7 +46,7 @@
                         </el-form-item>
                         <div class="">
                             <el-form-item label="房屋面积" prop="size">
-                                <el-input v-model="DetailForm.size"></el-input>
+                                <el-input v-model.number="DetailForm.size"></el-input>
                             </el-form-item>
                         </div>
 
@@ -73,18 +73,18 @@
                             </div>
                         </el-form-item>
 
-                        <el-form-item label="床的数量" >
+                        <el-form-item label="床的数量" prop="bedNum">
                             <el-select v-model="DetailForm.bedNum"  size="mini"  placeholder="请选择床的数量">
-                                <el-option label="1" value="1"></el-option>
-                                <el-option label="2" value="2"></el-option>
-                                <el-option label="3" value="3"></el-option>
-                                <el-option label="4" value="4"></el-option>
-                                <el-option label="5" value="5"></el-option>
-                                <el-option label="6" value="6"></el-option>
-                                <el-option label="7" value="7"></el-option>
-                                <el-option label="8" value="8"></el-option>
-                                <el-option label="9" value="9"></el-option>
-                                <el-option label="10" value="10"></el-option>
+                                <el-option label="1" :value="1"></el-option>
+                                <el-option label="2" :value="2"></el-option>
+                                <el-option label="3" :value="3"></el-option>
+                                <el-option label="4" :value="4"></el-option>
+                                <el-option label="5" :value="5"></el-option>
+                                <el-option label="6" :value="6"></el-option>
+                                <el-option label="7" :value="7"></el-option>
+                                <el-option label="8" :value="8"></el-option>
+                                <el-option label="9" :value="9"></el-option>
+                                <el-option label="10" :value="10"></el-option>
                             </el-select>
                         </el-form-item>
 
@@ -92,14 +92,11 @@
                             <el-input-number v-model="DetailForm.fitNum" controls-position="right"  :min="1" :max="4" size="mini"></el-input-number>
                         </el-form-item>
                         <el-form-item label="同类房数量" prop="HouseNum">
-
-
                             <div class="info-HouseNum">
-                                <el-input v-model="DetailForm.HouseNum" placeholder="请输入同类房间数量"></el-input>
+                                <el-input v-model.number="DetailForm.HouseNum" placeholder="请输入同类房间数量"></el-input>
                                 &nbsp;&nbsp;<span>套</span>
                             </div>
                         </el-form-item>
-
                     </el-form>
                 </div>
 
@@ -149,28 +146,23 @@
                                 <el-select  placeholder="请选择房客可以入住的时间" v-model="RuleForm.GuestInTime" >
                                     <el-option :label="time" :value="time" v-for="(time,index) in TimeLine" :key="index"></el-option>
                                 </el-select>
-
                             </el-form-item>
                             <el-form-item label="房客退房时间" prop="GuestOutTime">
                                 <el-select  placeholder="请选择房客可以退房的时间" v-model="RuleForm.GuestOutTime">
                                     <el-option :label="time" :value="time" v-for="(time,index) in TimeLine" :key="index"></el-option>
-
                                 </el-select>
-
                             </el-form-item>
                         </div>
-
                         <el-form-item label="接待房客时间" prop="GetGuestTime1">
                             <el-select  placeholder="请选择接待时间" v-model="RuleForm.GetGuestTime1">
                                 <el-option :label="time" :value="time" v-for="(time,index) in TimeLine" :key="index"></el-option>
                             </el-select>
                         </el-form-item>
 
-
                         <el-form-item label="是否有前台" prop="IsFrend">
                             <el-radio-group v-model="RuleForm.IsFrend">
-                                <el-radio  label="1">是</el-radio>
-                                <el-radio  label="0">否</el-radio>
+                                <el-radio  :label="1">是</el-radio>
+                                <el-radio  :label="0">否</el-radio>
                             </el-radio-group>
 
                         </el-form-item>
@@ -189,11 +181,11 @@
                         </el-form-item>
                         <el-form-item label="是否接待外宾" prop="ForeignGuests">
                             <el-radio-group v-model="RuleForm.ForeignGuests">
-                                <el-radio  label="1">是</el-radio>
-                                <el-radio  label="0">否</el-radio>
+                                <el-radio  :label="1">是</el-radio>
+                                <el-radio  :label="0">否</el-radio>
                             </el-radio-group>
                         </el-form-item>
-                        <el-form-item label="打扫换洗方式">
+                        <el-form-item label="打扫换洗方式" prop="HowManySweep">
                             <div class="Guest-In-time">
                                 <el-form-item prop="HowManySweep">
                                     <el-select  placeholder="多久提供打扫卫生" v-model="RuleForm.HowManySweep">
@@ -218,14 +210,14 @@
                         <div class="price-container">
                             <el-form-item label="售卖价格" prop="price">
                                 <div class="input-price">
-                                    <el-input v-model="PriceForm.price"></el-input>
-                                    &nbsp;&nbsp;
+                                    <el-input v-model.number="PriceForm.price"></el-input>
+                                    &nbsp;&nbsp
                                     <span>元</span>
                                 </div>
                             </el-form-item>
                             <el-form-item label="支付押金" prop="deposit">
                                 <div class="input-price">
-                                    <el-input v-model="PriceForm.deposit"></el-input>
+                                    <el-input v-model.number="PriceForm.deposit"></el-input>
                                     &nbsp;&nbsp;
                                     <span>元</span>
                                 </div>
@@ -239,81 +231,89 @@
 
             </div>
             <div class="item-content HousePhoto" v-if="currentId == 7">
-                <el-form  status-icon  :model="PhotoForm" >
+                <el-form  status-icon  :model="PhotoForm" :rules="rules" ref="PhotoForm">
                     <div class="item-title">
                         <div class="item-title-left">
                             <p>卧室</p>
                             <p class="photo-least">上传1张,展现完整床铺</p>
                         </div>
                     </div>
-                    <div class="upload-container">
-                        <el-upload
-                                :action="UploadURL"
-                                list-type="picture-card"
-                                :on-preview="handlePictureCardPreview"
-                                name="picture"
-                                :file-list="PhotoForm.bedRoomPhoto"
-                                :limit="1"
-                                :on-success="handleBedSuccess"
-                                :on-remove="removeBedSuccess"
-                                :before-upload="beforeAvatarUpload"
-                        >
-                            <i class="el-icon-plus"></i>
-                        </el-upload>
-                        <el-dialog :visible.sync="dialogVisible">
-                            <img width="100%" :src="dialogImageUrl" alt="">
-                        </el-dialog>
-                    </div>
+                    <el-form-item prop="bedRoomPhoto">
+                        <div class="upload-container">
+                            <el-upload
+                                    :action="UploadURL"
+                                    list-type="picture-card"
+                                    :on-preview="handlePictureCardPreview"
+                                    name="picture"
+                                    :file-list="PhotoForm.bedRoomPhoto"
+                                    :limit="1"
+                                    :on-success="handleBedSuccess"
+                                    :on-remove="removeBedSuccess"
+
+                            >
+                                <i class="el-icon-plus"></i>
+                            </el-upload>
+                            <el-dialog :visible.sync="dialogVisible">
+                                <img width="100%" :src="dialogImageUrl" alt="">
+                            </el-dialog>
+                        </div>
+                    </el-form-item>
+
+
                     <div class="item-title">
                         <div class="item-title-left">
                             <p>卫生间</p>
                             <p class="photo-least">上传1张，卫浴设施完整，地面整洁</p>
                         </div>
                     </div>
-                    <div class="upload-container">
-                        <el-upload
-                                :action="UploadURL"
-                                list-type="picture-card"
-                                :on-preview="handlePictureCardPreview"
-                                :file-list="PhotoForm.bathRoomPhoto"
-                                name="picture"
-                                :limit="1"
-                                :on-success="handleBathSuccess"
-                                :on-remove="removeBathSuccess"
-                                :before-upload="beforeAvatarUpload"
-                        >
-                            <i class="el-icon-plus"></i>
-                        </el-upload>
-                        <el-dialog :visible.sync="dialogVisible">
-                            <img width="100%" :src="dialogImageUrl" alt="">
-                        </el-dialog>
-                    </div>
+                    <el-form-item prop="bathRoomPhoto">
+                        <div class="upload-container">
+                            <el-upload
+                                    :action="UploadURL"
+                                    list-type="picture-card"
+                                    :on-preview="handlePictureCardPreview"
+                                    :file-list="PhotoForm.bathRoomPhoto"
+                                    name="picture"
+                                    :limit="1"
+                                    :on-success="handleBathSuccess"
+                                    :on-remove="removeBathSuccess"
+
+                            >
+                                <i class="el-icon-plus"></i>
+                            </el-upload>
+                            <el-dialog :visible.sync="dialogVisible">
+                                <img width="100%" :src="dialogImageUrl" alt="">
+                            </el-dialog>
+                        </div>
+                    </el-form-item>
+
                     <div class="item-title">
                         <div class="item-title-left">
                             <p>其他</p>
                             <p class="photo-least">上传2张，任意上传</p>
                         </div>
                     </div>
-                    <div class="upload-container">
-                        <el-upload
-                                :action="UploadURL"
-                                list-type="picture-card"
-                                :on-preview="handlePictureCardPreview"
-                                :file-list="PhotoForm.OtherPhoto"
-                                name="picture"
-                                :limit="2"
-                                :on-success="handleOtherSuccess"
-                                :on-remove="removeOtherSuccess"
-                                :before-upload="beforeAvatarUpload"
-                        >
-                            <i class="el-icon-plus"></i>
-                        </el-upload>
-                        <el-dialog :visible.sync="dialogVisible">
-                            <img width="100%" :src="dialogImageUrl" alt="">
-                        </el-dialog>
-                    </div>
-                </el-form>
+                    <el-form-item prop="OtherPhoto">
+                        <div class="upload-container">
+                            <el-upload
+                                    :action="UploadURL"
+                                    list-type="picture-card"
+                                    :on-preview="handlePictureCardPreview"
+                                    :file-list="PhotoForm.OtherPhoto"
+                                    name="picture"
+                                    :limit="2"
+                                    :on-success="handleOtherSuccess"
+                                    :on-remove="removeOtherSuccess"
 
+                            >
+                                <i class="el-icon-plus"></i>
+                            </el-upload>
+                            <el-dialog :visible.sync="dialogVisible">
+                                <img width="100%" :src="dialogImageUrl" alt="">
+                            </el-dialog>
+                        </div>
+                    </el-form-item>
+                </el-form>
             </div>
             <div class="item-content HouseDate" v-if="currentId == 8" >
                 <div class="set-house-price">
@@ -354,6 +354,13 @@
     export default {
         name: "UpdateHotel",
         data(){
+            var PhotoRoomPass = (rule,value,callback) => {
+                if (!value[0]){
+                    return callback(new Error('图片不能为空'));
+                }else{
+                    callback();
+                }
+            };
             return {
                 options:areajson,
                 isLoading:false,
@@ -462,28 +469,41 @@
                 },
                 rules:{
                     city:[
-                        {required:true,message:'请输入地区城市',trigger:'change'}
+                        {required:true,message:'请输入地区城市',trigger:['blur','change']}
                     ],
                     address:[
-                        {required:true,message:'请输入地址',trigger:'blur'}
+                        {required:true,message:'请输入地址',trigger:['blur','change']}
+                    ],
+                    HouseName:[
+                        {required:true,message:'请输入房屋名字',trigger:['blur','change']}
+                    ],
+                    HouseFeature:[
+                        {required:true,message:'请输入房屋特色',trigger:['blur','change']}
                     ],
                     TypeOfRental:[
-                        {required:true,message:'请选择房屋类型',trigger:'change'}
+                        {required:true,message:'请选择房屋类型',trigger:['blur','change']}
                     ],
                     TypeOfHouse:[
                         {required:true,message:'请选择房屋类型',trigger:'change'}
                     ],
                     size:[
-                        {required:true,message:'请输入房屋面积',trigger:'blur'}
+                        {required:true,message:'请输入房屋面积',trigger:['blur','change']},
+                        { type: 'number', message: '房屋面积必须为数字值'}
                     ],
                     landscape:[
                         {required:true,message:'请选择房屋景观',trigger:'change'}
                     ],
+                    bedNum:[
+                        {required:true,message:'请输入床的数量',trigger:['blur','change']},
+                        { type: 'number', message: '房屋面积必须为数字值'}
+                    ],
                     fitNum:[
-                        {required:true,message:'请输入宜居人数',trigger:'blur'}
+                        {required:true,message:'请输入宜居人数',trigger:'blur'},
+                        { type: 'number', message: '房屋面积必须为数字值'}
                     ],
                     HouseNum:[
-                        {required:true,message:'请输入同类房数量',trigger:'blur'}
+                        {required:true,message:'请输入同类房数量',trigger:['blur','change']},
+                        { type: 'number', message: '房屋面积必须为数字值'}
                     ],
                     GuestInTime:[
                         {required:true,message:'请选择房客入住时间',trigger:'change'}
@@ -492,36 +512,46 @@
                         {required:true,message:'请选择房客退房时间',trigger:'change'}
                     ],
                     IsFrend:[
-                        {required:true,message:'请选择是否有前台',trigger:'change'}
+                        {required:true,message:'请选择是否有前台',trigger:['blur','change']}
                     ],
                     gender:[
-                        {required:true,message:'请选择接待性别',trigger:'change'}
+                        {required:true,message:'请选择接待性别',trigger:['blur','change']}
                     ],
                     HowManySweep:[
-                        {required:true,message:'请选择打扫方式',trigger:'change'}
+                        {required:true,message:'请选择打扫方式',trigger:['blur','change']}
                     ],
                     HowManyReplace:[
-                        {required:true,message:'请选择换洗方式',trigger:'change'}
+                        {required:true,message:'请选择换洗方式',trigger:['blur','change']}
                     ],
                     requireList:[
-                        {required:true,message:'请输入房客要求',trigger:'change'}
+                        {required:true,message:'请输入房客要求',trigger:['blur','change']}
                     ],
                     GetGuestTime1:[
-                        {required:true,message:'请选择接待房客时间',trigger:'change'}
+                        {required:true,message:'请选择接待房客时间',trigger:['blur','change']}
                     ],
                     GetGuestTime2:[
-                        {required:true,message:'请选择接待房客时间',trigger:'change'}
+                        {required:true,message:'请选择接待房客时间',trigger:['blur','change']}
                     ],
                     ForeignGuests:[
-                        {required:true,message:'请选择接待房客时间',trigger:'change'}
+                        {required:true,message:'请选择接待房客时间',trigger:['blur','change']}
+                    ],
+                    bedRoomPhoto:[
+                        {validator: PhotoRoomPass},
+                    ],
+                    OtherPhoto:[
+                        {validator: PhotoRoomPass}
+                    ],
+                    bathRoomPhoto:[
+                        {validator: PhotoRoomPass},
                     ],
                     price:[
-                        {required:true,message:'请输入价格',trigger:'blur'}
+                        {required:true,message:'请输入价格',trigger:['blur','change']},
+                        { type: 'number', message: '价格必须为数字值'}
                     ],
                     deposit:[
-                        {required:true,message:'请输入押金',trigger:'blur'}
+                        {required:true,message:'请输入押金',trigger:['blur','change']},
+                        { type: 'number', message: '押金必须为数字值'}
                     ]
-
                 },
 
             }
@@ -635,8 +665,8 @@
                     GuestInTime:rule.inTime,
                     GuestOutTime:rule.outTime,
                     GetGuestTime1:rule.receiveTime,
-                    ForeignGuests:rule.acceptForeign.toString(),
-                    IsFrend:rule.isProscenium.toString(),
+                    ForeignGuests:rule.acceptForeign,
+                    IsFrend:rule.isProscenium,
                     gender:rule.acceptSex,
                     acceptChild:rule.acceptChild == 1 ? true : false,
                     acceptOld:rule.acceptOld == 1 ? true : false,
@@ -697,19 +727,19 @@
             },
             handleBedSuccess(res,file,fileList){
                 var url = this.requiredURL+res.msg;
-                this.PhotoForm.bedRoomPhoto.push({name:file.name,url:url})
+                this.PhotoForm.bedRoomPhoto.push({name:file.name,url:url});
+                this.$refs['PhotoForm'].validateField('bedRoomPhoto');
 
             },
             handleBathSuccess(res,file,fileList){
-
                 var url = this.requiredURL+res.msg;
-                this.PhotoForm.bathRoomPhoto.push({name:file.name,url:url})
+                this.PhotoForm.bathRoomPhoto.push({name:file.name,url:url});
+                this.$refs['PhotoForm'].validateField('bathRoomPhoto');
             },
             handleOtherSuccess(res,file,fileList){
-
                 var url = this.requiredURL+res.msg;
-
-                this.PhotoForm.OtherPhoto.push({name:file.name,url:url})
+                this.PhotoForm.OtherPhoto.push({name:file.name,url:url});
+                this.$refs['PhotoForm'].validateField('OtherPhoto');
             },
             removeBedSuccess(file,fileList){
                 console.log(file,fileList)
@@ -803,9 +833,7 @@
             ReorganFacilityForm(){
                 var Form = this.FacilityForm;
                 var Facility = this.facilityCreat(Form);
-
                 return Facility;
-
             },
             ReorganRule(){
                 var Form = this.RuleForm;
@@ -968,12 +996,12 @@
     .Transparent{
         width: 100%;
         height: 100%;
-        position: absolute;
+        position: fixed;
         background-color: rgba(0,0,0,0.6);
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index:100;
+        z-index:3300;
 
     }
     .input-form{
@@ -1023,10 +1051,12 @@
         text-align: right;
         padding-right: 100px;
         margin-top: 20px;
+        z-index: 100;
 
     }
 
     .next-type-btn{
+
 
 
 
@@ -1036,6 +1066,7 @@
 
     }
     .ivu-btn{
+
         display: inline-block;
         margin-bottom: 0;
         font-weight: 400;
@@ -1090,6 +1121,7 @@
         line-height: 27px;
         padding-left: 10px;
     }
+
     .Detail-form{
         margin-left: 30px;
         margin-top: 30px;
@@ -1148,10 +1180,9 @@
         font-size: 12px;
         color: #666;
         line-height: 12px;
-        margin-top: 10px;
+        margin-top: 5px;
     }
     .upload-container{
-        margin-bottom: 20px;
         margin-top: 20px;
         margin-left: 20px;
 

@@ -499,7 +499,7 @@
                     ],
                     fitNum:[
                         {required:true,message:'请输入宜居人数',trigger:'blur'},
-                        { type: 'number', message: '房屋面积必须为数字值'}
+
                     ],
                     HouseNum:[
                         {required:true,message:'请输入同类房数量',trigger:['blur','change']},
@@ -817,7 +817,6 @@
                     "housingQuantity":Form.HouseNum                       //房子数量
                 }
 
-                this.toStr(DetailForm);
                 Object.assign(obj,DetailForm);
             },
             ReorganDescription(obj){
@@ -849,9 +848,7 @@
                     "acceptForeign":Form.ForeignGuests,
                     "cleaning":Form.HowManySweep,
                     "sheets":Form.HowManyReplace,
-
                 };
-
                 return RuleForm;
             },
             ReorganHousePhoto(obj){

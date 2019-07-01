@@ -137,7 +137,6 @@
         color: white;
         background-color: #6e80e3;
         border-color: #6e80e3;
-
     }
 
 </style>

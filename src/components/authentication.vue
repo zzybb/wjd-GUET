@@ -10,20 +10,17 @@
                     <el-input v-model="IdentityForm.HouseName" placeholder="真实姓名或个性昵称"></el-input>
                 </el-form-item>
                 <el-form-item label="您的电话 此电话在客房预订成功后可见" prop="HousePhone">
-                    <el-input v-model="IdentityForm.HousePhone" placeholder="请输入您的电话..."></el-input>
+                    <el-input v-model.number="IdentityForm.HousePhone" placeholder="请输入您的电话..."></el-input>
                 </el-form-item>
-                <el-form-item label="房东头像/门店标志">
+                <el-form-item label="房东头像/门店标志" prop="HouseLabel">
                     <el-upload
                             :action="UploadURL"
                             list-type="picture-card"
                             :file-list="IdentityForm.HouseLabel"
                             :on-success="HandLabelSuccess"
-                            name="picture"
-                    >
-                        <i class="el-icon-plus">
+                            name="picture">
 
-                        </i>
-
+                        <i class="el-icon-plus"></i>
                     </el-upload>
                 </el-form-item>
                 <!--<el-form-item label="资质认证方式" >
@@ -40,51 +37,54 @@
                 <el-form-item label="身份证号" prop="identityNumber">
                     <el-input v-model="IdentityForm.identityNumber" placeholder="请输入您的身份证号..."></el-input>
                 </el-form-item>
-                <el-form-item label="证件上传" >
+
                     <div class="identity-three">
-
-                        <div class="avatar">
-                            <p class="avatar-tip">上传手持身份证正面</p>
-
-                            <el-upload
+                        <el-form-item prop="IdeHand">
+                            <div class="avatar">
+                                <p class="avatar-tip">上传手持身份证正面</p>
+                                <el-upload
                                     class="avatar-uploader"
                                     :action="UploadURL"
-                                    :file-list="IdentityForm.IdentityUpload"
+                                    :file-list="IdentityForm.IdeHand"
                                     :on-success="HandSuccess"
                                     name="picture"
-                            >
+                                >
                                 <img v-if="HandUrl" :src="HandUrl" class="avatar">
                                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                            </el-upload>
-                        </div>
-                        <div class="avatar">
-                            <p class="avatar-tip">上传身份证正面</p>
-                            <el-upload
-                                    class="avatar-uploader"
-                                    :action="UploadURL"
-                                    :on-success="PositiveSuccess"
-                                    :file-list="IdentityForm.IdentityUpload"
-                                    name="picture"
-                            >
-                                <img v-if="PositiveUrl" :src="PositiveUrl" class="avatar">
-                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                            </el-upload>
-                        </div>
-                        <div class="avatar">
-                            <p class="avatar-tip">上传身份证反面</p>
-                            <el-upload
-                                    class="avatar-uploader"
-                                    :action="UploadURL"
-                                    :on-success="NegativeSuccess"
-                                    :file-list="IdentityForm.IdentityUpload"
-                                    name="picture"
-                            >
-                                <img v-if="NegativeUrl" :src="NegativeUrl" class="avatar">
-                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                            </el-upload>
-                        </div>
+                                </el-upload>
+                            </div>
+                        </el-form-item>
+                        <el-form-item prop="IdePositive">
+                            <div class="avatar">
+                                <p class="avatar-tip">上传身份证正面</p>
+                                <el-upload
+                                        class="avatar-uploader"
+                                        :action="UploadURL"
+                                        :on-success="PositiveSuccess"
+                                        :file-list="IdentityForm.IdePositive"
+                                        name="picture"
+                                >
+                                    <img v-if="PositiveUrl" :src="PositiveUrl" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
+                            </div>
+                        </el-form-item>
+                        <el-form-item prop="IdeNegative">
+                            <div class="avatar">
+                                <p class="avatar-tip">上传身份证反面</p>
+                                <el-upload
+                                        class="avatar-uploader"
+                                        :action="UploadURL"
+                                        :on-success="NegativeSuccess"
+                                        :file-list="IdentityForm.IdeNegative"
+                                        name="picture"
+                                >
+                                    <img v-if="NegativeUrl" :src="NegativeUrl" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
+                            </div>
+                        </el-form-item>
                     </div>
-                </el-form-item>
                 <el-form-item>
                     <div class="next-type">
                         <el-button type="primary" @click="submitForm()" class="next-type-btn ivu-btn"
@@ -101,10 +101,16 @@
     export default {
         name: "authentication",
         data(){
+            var PhotoPass = (rule,value,callback) => {
+                if (!value[0]){
+                    return callback(new Error('图片不能为空'));
+                }else{
+                    callback();
+                }
+            };
             return {
                 labelPosition:'top',
-                requiredURL:'http://192.168.1.101:8090/',
-                UploadURL:this.$myconfig.photoUpLoad,
+                requiredURL:this.$myconfig.ImageURL,
                 facilitys:facility2json,               //设施中英对照表
                 IdentityForm:{
                     HouseName:'',
@@ -112,29 +118,47 @@
                     PeopleName:'',
                     identityNumber:'',
                     HouseLabel:[],
-                    IdentityUpload:[]
+                    IdePositive:[],
+                    IdeNegative:[],
+                    IdeHand:[]
 
                 },
                 rules:{
                     HouseName:[
-                        {required:true,message:'请输入房屋名称',trigger:'blur'}
+                        {required:true,message:'请输入房屋名称',trigger:['blur','change']}
                     ],
                     HousePhone:[
-                        {required:true,message:'请输入电话',trigger:'blur'}
+                        {required:true,message:'请输入电话',trigger:['blur','change']},
+                        { type: 'number', message: '电话号码必须为数字值'}
                     ],
                     PeopleName:[
-                        {required:true,message:'请输入人名',trigger:'blur'}
+                        {required:true,message:'请输入人名',trigger:['blur','change']}
                     ],
                     identityNumber:[
-                        {required:true,message:'请输入身份证号',trigger:'blur'}
+                        {required:true,message:'请输入身份证号',trigger:['blur','change']}
+                    ],
+                    HouseLabel:[
+                        {validator: PhotoPass}
+                    ],
+                    IdeHand:[
+                        {validator: PhotoPass}
+                    ],
+                    IdePositive:[
+                        {validator: PhotoPass}
+                    ],
+                    IdeNegative:[
+                        {validator: PhotoPass}
                     ]
-
                 },
                 PositiveUrl:'',
                 NegativeUrl:'',
                 HandUrl:'',
-
-
+                labelUrl:''
+            }
+        },
+        computed:{
+            UploadURL(){
+                return this.$myconfig.ServerPath + this.$myconfig.photoUpLoad
             }
         },
         methods:{
@@ -142,25 +166,29 @@
 
                 var url = this.requiredURL+res.msg;
                 this.$set(this.IdentityForm.HouseLabel, 0, {name:file.name,url:url});
+                this.labelUrl = URL.createObjectURL(file.raw);
+                this.$refs['IdentityForm'].validateField('HouseLabel');
             },
             HandSuccess(res, file) {
 
                 this.HandUrl = URL.createObjectURL(file.raw);
                 var url = this.requiredURL+res.msg;
-                this.$set(this.IdentityForm.IdentityUpload, 0, {name:file.name,url:url});
+                this.$set(this.IdentityForm.IdeHand, 0, {name:file.name,url:url});
+                this.$refs['IdentityForm'].validateField('IdeHand');
             },
             PositiveSuccess(res, file) {
                 var url = this.requiredURL+res.msg;
-                this.$set(this.IdentityForm.IdentityUpload, 1, {name:file.name,url:url});
+                this.$set(this.IdentityForm.IdePositive, 0, {name:file.name,url:url});
                 this.PositiveUrl = URL.createObjectURL(file.raw);
+                this.$refs['IdentityForm'].validateField('IdePositive');
             },
             NegativeSuccess(res, file){
                 var url = this.requiredURL+res.msg;
-                this.$set(this.IdentityForm.IdentityUpload, 2, {name:file.name,url:url});
+                this.$set(this.IdentityForm.IdeNegative, 0, {name:file.name,url:url});
                 this.NegativeUrl = URL.createObjectURL(file.raw);
+                this.$refs['IdentityForm'].validateField('IdeNegative');
             },
             ReorganPosition(obj){
-
                 var Form = JSON.parse(localStorage.getItem("PositionForm"));
                 var PositionForm = {
                     "city":Form.city[1],                                  //城市
@@ -257,9 +285,9 @@
                 Object.assign(obj,Price);
             },
             ReorganIdentity(obj){
-                var idcardImage1 = this.splicePhoto(this.IdentityForm.IdentityUpload[0].url),
-                    idcardImage2 = this.splicePhoto(this.IdentityForm.IdentityUpload[1].url),
-                    idcardImage3 = this.splicePhoto(this.IdentityForm.IdentityUpload[2].url),
+                var idcardImage1 = this.splicePhoto(this.IdentityForm.IdeHand[0].url),
+                    idcardImage2 = this.splicePhoto(this.IdentityForm.IdePositive[0].url),
+                    idcardImage3 = this.splicePhoto(this.IdentityForm.IdeNegative[0].url),
                     avatarImage = this.splicePhoto(this.IdentityForm.HouseLabel[0].url);
 
                 var identity = {
@@ -333,22 +361,24 @@
                 };
             },
             submitForm(){ //最终提交
-                var obj = {};
-                this.ReorganPosition(obj);
-                this.ReorganDetail(obj);
-                this.ReorganDescription(obj);
-                this.ReorganHousePhoto(obj);
-                this.ReorganPrice(obj);
-                this.ReorganIdentity(obj);
-                obj["facilityService"] = this.ReorganFacilityForm();                //设施服务单独设置
-                obj["hotelRule"] = this.ReorganRule();                              //酒店规则单独设置
-                obj["token"] = localStorage.getItem("token");                       //token
-                console.log(obj);
-                this.$api.post(this.$myconfig.hotelSave,obj,r=>{
-                    console.log("提交成功",r.data)
-                },err=>{
-                    console.log(err);
-                });
+                if (this.$refs['IdentityForm'] != undefined){
+                    this.$refs['IdentityForm'].validate((valid) => {
+                        if (valid) {
+                            this.$message({
+                                message: '提交房源成功',
+                                type: 'success'
+                            });
+                            this.organData();
+                        } else {
+
+                            return false;
+                        }
+                    });
+                } else {
+                    this.organData();
+                }
+
+
 
                 var obj2 = {   //对比用的对象，没作用的
                     "address": "string",//
@@ -423,8 +453,44 @@
                         "sheets": "string"
                     },
                 }
+            },
+            organData(){
+                var obj = {};
+                this.ReorganPosition(obj);
+                this.ReorganDetail(obj);
+                this.ReorganDescription(obj);
+                this.ReorganHousePhoto(obj);
+                this.ReorganPrice(obj);
+                this.ReorganIdentity(obj);
+                obj["facilityService"] = this.ReorganFacilityForm();                //设施服务单独设置
+                obj["hotelRule"] = this.ReorganRule();                              //酒店规则单独设置
+                console.log(obj);
+                this.$api.post(this.$myconfig.hotelSave,obj,r=>{
+                    this.$message({
+                        message: '提交成功',
+                        type: 'success'
+                    });
+                    this.cleanStorg();
+                    this.$router.push({name:'manageSystem'});
+                },err=>{
+                    console.log(err);
+                });
+            },
+            cleanStorg(){
+                localStorage.removeItem("FacilityForm");
+                localStorage.removeItem("DescriptionForm");
+                localStorage.removeItem("PhotoForm");
+                localStorage.removeItem("FormCompleteId");
+                localStorage.removeItem("DetailForm");
+                localStorage.removeItem("RuleForm");
+                localStorage.removeItem("PriceForm");
+                localStorage.removeItem("PositionForm");
+                localStorage.removeItem("palceName");
+                localStorage.removeItem("currentId");
+                localStorage.removeItem("writingId");
             }
         },
+
         created(){
             if (localStorage.getItem("IdentityForm") != null){
                 var IdentityForm = JSON.parse(localStorage.getItem("IdentityForm"));
@@ -493,6 +559,7 @@
         position: relative;
 
 
+
     }
     .identity-three{
         display: flex;
@@ -509,6 +576,7 @@
         border-top: 1px solid #ddd;
         margin: 0 auto;
         width: 990px;
+        margin-top: 30px;
     }
     .next-type-btn{
         float: right;

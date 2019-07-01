@@ -56,7 +56,6 @@
         },
         mounted(){
             var self = this;
-
             self.ThisForm = {
                 obj:self.$refs,
                 formName:'DescriptionForm',
@@ -95,6 +94,7 @@
         margin-top: 30px;
         width: 430px;
     }
+
     .next-type{
         border-top: 1px solid #ddd;
         margin: 0 auto;

@@ -21,7 +21,6 @@
                         <div class="i-type04"><span>单间出租</span></div>
                     </li>
                 </ul>
-
         </div>
         <div class="Hotel-register-bottom">
             <h1>提高平台曝光和排名</h1>
@@ -34,7 +33,7 @@
         </div>
         <div class="wrap-lg">
             <span>我已经准备好了！</span>
-            <a class="btn-primary-m" href="">发布中国大陆房屋</a>
+            <router-link class="btn-primary-m" :to="{name:'createunitHouse'}">发布中国大陆房屋</router-link>
         </div>
 
 
@@ -48,7 +47,6 @@
     }
 </script>
 <style scoped>
-
 
     .Hotel-register-body{
         height: 500px;

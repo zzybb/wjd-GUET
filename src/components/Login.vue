@@ -7,9 +7,9 @@
             </div>
             <div class="login-left-input">
                 <input type="text" placeholder="邮箱/手机号/用户名" id="mobile" v-model="mobile">
-                <input type="text" placeholder="密码" id="password" v-model="password">
-                <input type="text" placeholder="请输入验证码" id="verifyCodePic" >
-                <img src="../assets/register/VerifyImage.jpg">
+                <input type="password" placeholder="密码" id="password" v-model="password">
+                <input type="text" placeholder="请输入验证码" id="verifyCodePic" v-model="captcha" >
+                <img :src="cachePath">
                 <label style="color: white">
                     <input id="saveUserLongTime" type="checkbox" v-model="checked">
                     保存登录时长一个星期
@@ -27,7 +27,6 @@
                     <a id="sinaLogin" title="新浪微博账户登录" href="">微博</a>
                     <a id="wechatLogin" title="微信" href="">微信</a>
                 </p>
-
             </div>
 
             <div class="text-cont">
@@ -44,21 +43,52 @@
             return {
                 mobile:'',
                 password:'',
-                checked:false
+                checked:false,
+                cachePath:'',
+                captcha:'',
+                uuid:''
             }
         },
+        created(){
+            this.getCapth();
+        },
         methods:{
+            getUUID() {
+                this.uuid =  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+                    return (c === 'x' ? (Math.random() * 16 | 0) : ('r&0x3' | '0x8')).toString(16)
+                })
+
+                return this.uuid;
+            },
+
             inputLogin(){
                 this.$api.post(this.$myconfig.userLogin,{
                     mobile:this.mobile,
-                    password:this.password
+                    password:this.password,
+                    captcha:this.captcha,
+                    uuid:this.uuid
                 },success=>{
-                    console.log(success.data);
-                    localStorage.setItem("token",success.data.token);
+                    if (success.data.msg != 'success'){
+                        this.$message.error(success.data.msg);
+                        this.getCapth();
+                    }
+                    else{
+                        localStorage.setItem("token",success.data.token);
+                        this.$message({
+                            message: '登录成功',
+                            type: 'success'
+                        });
+                        this.$router.push({name:'home'});
+                    }
+
 
                 },failure=>{
-                    console.log("登录失败，失败原因：" + failure.data)
+                    this.$message.error(failure.data.msg);
+
                 })
+            },
+            getCapth(){
+                this.cachePath = this.$myconfig.ServerPath +  "wjd/app/captcha.jpg?uuid=" + this.getUUID();
             }
         }
     }
@@ -138,6 +168,8 @@
     }
 
     .login-content-left img{
+        width: 130px;
+        height: 42px;
         margin-top:30px;
         margin-left: 15px;
     }

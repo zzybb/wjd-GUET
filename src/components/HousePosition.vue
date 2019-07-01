@@ -19,15 +19,27 @@
                     <el-Cascader :options="options"
                                  v-model="PositionForm.city"
                                  :props="defaultOptions"
-                    ></el-Cascader>
+                    >
+                    </el-Cascader>
                 </el-form-item>
                 <el-form-item label="地址" prop="address">
                     <el-input v-model="PositionForm.address"></el-input>
                 </el-form-item>
-                <el-form-item label="补充说明(选填)">
-                    <el-input v-model="PositionForm.addressSupplement"></el-input>
-                </el-form-item>
-
+                <baidu-map class="bm-view"
+                           :center="center"
+                           :zoom="map.zoom"
+                           :scroll-wheel-zoom="true"
+                           @click="handleClick"
+                >
+                    <bm-marker :position="map.pointCenter" :dragging="true" animation="BMAP_ANIMATION_BOUNCE">
+                        <bm-label  :content="PositionForm.address" :labelStyle="{color: 'black', fontSize : '10px'}" :offset="{width: -35, height: 30}"/>
+                    </bm-marker>
+                </baidu-map>
+                <div class="addition-tell">
+                    <el-form-item label="补充说明(选填)">
+                        <el-input v-model="PositionForm.addressSupplement"></el-input>
+                    </el-form-item>
+                </div>
                 <next-step :form="ThisForm"></next-step>
             </el-form>
         </div>
@@ -37,28 +49,32 @@
 <script>
     import areajson from '../utils/citys.json';
     import NextStep from "./nextStep";
-
-
     export default {
         name: "HousePosition",
         components: {NextStep},
         data(){
             return{
+                keyword:'',
                 defaultOptions:{
                     value:'label'
                 },
+                map:{
+                    center:"",
+                    zoom:20,
+                    pointCenter:{lng: 116.404, lat: 39.915}
+                },
                 ThisForm:{},
                 PositionForm:{
-                    city:[],
+                    city:["北京市","北京城区","东城区"],
                     address:'',
                     addressSupplement:''
                 },
                 rules:{
                     city:[
-                        {required:true,message:'请输入地区城市',trigger:'change'}
+                        {required:true,message:'请输入地区城市',trigger: ['blur', 'change']}
                     ],
                     address:[
-                        {required:true,message:'请输入地址',trigger:'blur'}
+                        {required:true,message:'请输入地址',trigger: ['blur', 'change']}
                     ]
                 },
                 labelPosition:'top',
@@ -66,6 +82,12 @@
                 address:'',
                 addition:'',
                 HouseDetailNum:''
+            }
+        },
+        computed:{
+            center(){
+                return this.PositionForm.city[0] + this.PositionForm.city[1] + this.PositionForm.address
+
             }
         },
         created(){
@@ -82,10 +104,19 @@
                 locationObj:self.PositionForm
             };
         },
+        methods:{
+            handleClick(params){
+                this.map.pointCenter = params.point
+            }
+        }
     }
 </script>
 
 <style scoped>
+    .bm-view{
+        width: 1000px;
+        height: 400px;
+    }
     .House-position{
         float: right;
         position: relative;
@@ -127,7 +158,7 @@
 
     .g-location-info-desc{
         position: absolute;
-        top: 150px;
+        top: 100px;
         right: 150px;
         width: 358px;
         height: 159px;
@@ -150,6 +181,12 @@
         letter-spacing: 0;
         font-family: MicrosoftYaHei;
         color: #666;
+    }
+    .localtion li{
+        z-index: 100;
+    }
+    .addition-tell{
+        margin-top: 50px;
     }
     .next-type{
         border-top: 1px solid #ddd;

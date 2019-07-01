@@ -1,10 +1,47 @@
+import router from "../router";
+var axios = require('axios')
 /**
  * Created by tan on 2017/10/23.
  */
+let baseUrl= "";   //这里是一个默认的url，可以没有
+switch (process.env.NODE_ENV) {
+  case 'development':
+    baseUrl = "http://localhost:8080/wjd/app"  //开发环境url
+    break
+  case 'production':
+    baseUrl = "http://10.12.0.180:8080/wjd/app"   //生产环境url
+    break
+}
 
-var root = '/wjd/app'
+axios.interceptors.request.use(
+    config => {
+
+      if (localStorage.getItem("token")) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
+        config.headers.token = localStorage.getItem("token");
+      }
+      return config;
+    },
+    err => {
+      return Promise.reject(err);
+    });
+
+axios.interceptors.response.use(
+    response => {
+      if (response.data.msg == "token失效，请重新登录"){
+        localStorage.removeItem("token");
+        router.push({name:'loginPage'})
+      }
+
+      return response
+    },
+    error => {
+      return Promise.reject(error)
+    }
+)
+
+
 // 引用axios
-var axios = require('axios')
+
 // 自定义判断元素类型JS
 function toType (obj) {
   return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1].toLowerCase()
@@ -35,16 +72,18 @@ function filterNull (o) {
  另外，不同的项目的处理方法也是不一致的，这里出错就是简单的alert
  */
 
+
+
 function apiAxios (method, url, params, success, failure) {
   if (params) {
     params = filterNull(params)
   }
-  axios({
+  return axios({
     method: method,
     url: url,
     data: method === 'POST' || method === 'PUT' ? params : null,
     params: method === 'POST' || method === 'GET' || method === 'DELETE' ? params : null,
-    baseURL: root,
+    baseURL: baseUrl,
     withCredentials: false
   })
     .then(function (res) {
@@ -61,6 +100,26 @@ function apiAxios (method, url, params, success, failure) {
       }
     })
 }
+
+function apiAxiosNoRes (method, url, params) {
+  if (params) {
+    params = filterNull(params)
+  }
+  return axios({
+    method: method,
+    url: url,
+    data: method === 'POST' || method === 'PUT' ? params : null,
+    params: method === 'POST' || method === 'GET' || method === 'DELETE' ? params : null,
+    baseURL: baseUrl,
+    withCredentials: false
+  })
+}
+
+function apiAxiosAll(reqList,callback){
+
+  axios.all(reqList).then(axios.spread(callback));
+}
+
 
 function fileAxios (formData, success, failure) {
   axios({
@@ -86,6 +145,8 @@ function fileAxios (formData, success, failure) {
   })
 }
 
+
+
 // 返回在vue模板中的调用接口
 export default {
   get: function (url, params, success, failure) {
@@ -102,5 +163,13 @@ export default {
   },
   fileAxios: function (formData, success, failure) {
     return fileAxios(formData, success, failure)
+  },
+  NoResPost:function(url,params){
+    return apiAxiosNoRes('POST',url,params)
+  },
+  axiosAll:function(reqList,callback){
+    return apiAxiosAll(reqList,callback)
   }
+
 }
+

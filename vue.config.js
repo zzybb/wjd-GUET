@@ -5,6 +5,7 @@ function resolve (dir) {
 }
 
 module.exports = {
+
   chainWebpack: config => {
     //路径配置
     config.resolve.alias
@@ -16,18 +17,10 @@ module.exports = {
   devServer: {
     proxy: {
       '/wjd': { //后台接口
-        target: 'http://192.168.1.101:8080/',
+        target: 'http://10.12.0.180:8080/',
         ws: true,
         changeOrigin: true
       },
-      '/image':{ //图片服务器地址
-        target: 'http://192.168.1.101:8090/',
-        ws:true,
-        changeOrigin: true,
-        pathRewrite: {
-          '^/image':''
-        }
-      }
     }
   }
 };

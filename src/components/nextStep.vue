@@ -28,6 +28,7 @@
                     this.locationStore();
                     return;
                 }
+                console.log(ref[formName]);
                 ref[formName].validate((valid) => {
                     if (valid) {
                         this.changeFormId();

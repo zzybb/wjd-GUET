@@ -1,6 +1,9 @@
 <template>
     <div class="Hotel-register-nav">
-        <img src="../assets/merchant-register/GUET.png">
+        <div class="order-nav-body">
+            <img src="../assets/home/logo.png" class="navLogo">
+            <span class="logoFont">微酒店</span>
+        </div>
     </div>
 </template>
 
@@ -11,25 +14,30 @@
 </script>
 
 <style scoped>
-    .Hotel-register-nav{
+
+    .order-nav-body{
+        width: 100%;
+        height: 60px;
+        font-size: 14px;
+        box-shadow: 0 0 8px #cfcfcf;
+        border-top: 1px solid #3e97e2;
         display: flex;
         align-items: center;
-        height: 80px;
-        overflow: hidden;
-        background-color: #5264cc;
     }
 
-    .Hotel-register-nav img{
-        width: 300px;
-        height: 50px;
+    .navLogo{
         margin-left: 200px;
+        width: 60px;
     }
 
-    .Hotel-register-nav h1{
-
-        font-size: 25px;
-        color: white;
-        margin-left: 300px;
+    .logoFont{
+        font-size: 30px;
+        font-weight: 700;
+        color: #3e97e2;
+        font-family: 幼圆;
+        letter-spacing: 3px;
     }
+
+
 
 </style>

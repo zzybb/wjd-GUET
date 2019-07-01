@@ -1,6 +1,6 @@
 <template>
     <div id="createunitHouse">
-        <merchant-nav></merchant-nav>
+        <slider></slider>
         <div id="select-body">
             <div class="step-content">
                 <ul>
@@ -10,7 +10,6 @@
                         :class="[currentId == step.id ? 'active' : '',FormCompleteId.indexOf(step.id) == -1 && currentId != step.id
                         && writingId != step.id ? 'disable-click':'']"
                     >
-
                         <div class="step-img"
                              :class="['stepList'+step.id,
                                       currentId == step.id?'stepActList'+step.id:'']"
@@ -48,12 +47,14 @@
     import Authentication from "../components/authentication";
     import BottomNav from "../components/bottomNav";
     import { createNamespacedHelpers } from 'vuex'
+    import Slider from "../components/slider";
 
     const { mapState, mapMutations } = createNamespacedHelpers('merchantForm');
 
     export default {
         name: "createUnitHouse",
         components: {
+            Slider,
             BottomNav,
             Authentication,
             PriceSetting,
@@ -131,9 +132,8 @@
         clear: both;
     }
     #select-body{
-        margin: 20px auto;
+        margin: 100px auto;
         width: 1300px;
-
     }
     .step-content{
         width: 200px;

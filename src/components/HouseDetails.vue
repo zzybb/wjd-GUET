@@ -20,7 +20,7 @@
                     </el-radio-group>
                 </el-form-item>
                 <el-form-item label="房屋面积" prop="size">
-                    <el-input v-model="DetailForm.size" placeholder="单位为：平方米"></el-input>
+                    <el-input v-model.number="DetailForm.size" placeholder="单位为：平方米"></el-input>
                 </el-form-item>
                 <el-form-item label="房屋景观" prop="landscape">
                     <el-select v-model="DetailForm.landscape" placeholder="请选择活动区域">
@@ -32,9 +32,10 @@
                 </el-form-item>
                 <el-form-item label="房屋户型">
                     <div class="House-type">
-                            <p>卧室 &nbsp;
-                                <el-input-number v-model="DetailForm.HouseDetailNum.bedroom" controls-position="right" :min="0" :max="10" size="mini"></el-input-number>
-                            </p>
+                        <p>卧室 &nbsp;
+                            <el-input-number v-model="DetailForm.HouseDetailNum.bedroom" controls-position="right"
+                                             :min="0" :max="10" size="mini"></el-input-number>
+                        </p>
                         <p>卫生间&nbsp<el-input-number v-model="DetailForm.HouseDetailNum.bathroom" controls-position="right" :min="0" :max="10" size="mini"></el-input-number></p>
                         <p>客厅&nbsp<el-input-number v-model="DetailForm.HouseDetailNum.livingRoom" controls-position="right" :min="0" :max="10" size="mini"></el-input-number></p>
                         <p>厨房&nbsp<el-input-number v-model="DetailForm.HouseDetailNum.kitchen" controls-position="right" :min="0" :max="10" size="mini"></el-input-number></p>
@@ -42,7 +43,7 @@
                         <p>阳台&nbsp<el-input-number v-model="DetailForm.HouseDetailNum.balcony" controls-position="right" :min="0" :max="10" size="mini"></el-input-number></p>
                     </div>
                 </el-form-item>
-                <el-form-item label="床的数量">
+                <el-form-item label="床的数量" prop="bedNum">
 
 
                         <el-select v-model="DetailForm.bedNum"  size="mini"  placeholder="请选择床的数量">
@@ -60,13 +61,13 @@
 
                 </el-form-item>
                 <el-form-item label="宜住人数" prop="fitNum">
-                    <el-input-number v-model="DetailForm.fitNum" controls-position="right"  :min="1" :max="4" size="mini"></el-input-number>
+                    <el-input-number v-model="DetailForm.fitNum" controls-position="right"  :min="1" :max="6" size="mini"></el-input-number>
                 </el-form-item>
                 <el-form-item label="同类房数量" prop="HouseNum">
 
                     <p class="info-titp2">房间数量是指相同类型房间的数量，最终会以库存的形式呈现。</p>
                     <div class="info-HouseNum">
-                        <el-input v-model="DetailForm.HouseNum" placeholder="请输入同类房间数量"></el-input>
+                        <el-input v-model.number="DetailForm.HouseNum" placeholder="请输入同类房间数量"></el-input>
                         &nbsp;&nbsp;<span>套</span>
                     </div>
                 </el-form-item>
@@ -83,6 +84,7 @@
         name: "HouseDetails",
         components: {NextStep},
         data(){
+
             return{
                 ThisForm:{},
                 labelPosition:'top',   //输入框文字显示位置
@@ -105,13 +107,15 @@
                 },
                 rules:{                //校验规则
                     TypeOfRental:[
-                        {required:true,message:'请选择房屋类型',trigger:'change'}
+                        {required:true,message:'请选择房屋类型',trigger: ['blur', 'change']},
+
                     ],
                     TypeOfHouse:[
-                        {required:true,message:'请选择房屋类型',trigger:'change'}
+                        {required:true,message:'请选择房屋类型',trigger: ['blur', 'change']}
                     ],
                     size:[
-                        {required:true,message:'请输入房屋面积',trigger:'blur'}
+                        {required:true,message:'请输入房屋面积',trigger:'blur'},
+                        { type: 'number', message: '房屋面积必须为数字值'}
                     ],
                     landscape:[
                         {required:true,message:'请选择房屋景观',trigger:'change'}
@@ -120,7 +124,17 @@
                         {required:true,message:'请输入宜居人数',trigger:'blur'}
                     ],
                     HouseNum:[
-                        {required:true,message:'请输入同类房数量',trigger:'blur'}
+                        {required:true,message:'请输入同类房数量',trigger:'blur'},
+                        { type: 'number', message: '同类房数量必须为数字值'}
+                    ],
+                    HouseName:[
+                        {required:true,message:'请输入房屋名称',trigger:'blur'}
+                    ],
+                    HouseFeature:[
+                        {required:true,message:'请输入房屋特色',trigger:'blur'}
+                    ],
+                    bedNum:[
+                        {required:true,message:'请选择床的数量',trigger: ['blur', 'change']}
                     ]
 
                 }
@@ -196,7 +210,6 @@
     .info-HouseNum{
         display: flex;
         align-items: center;
-
     }
     .info-titp span{
         color: red;

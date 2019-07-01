@@ -1,9 +1,9 @@
 <template>
-    <div class="list-detail">
+    <div class="list-detail" v-loading="isLoading" >
         <div>
             <slider></slider>
         </div>
-        <div class="top-image">
+        <div class="top-image" >
             <el-carousel indicator-position="outside"  height="590px">
                 <el-carousel-item v-for="item in DetailForm.HotelImageList" :key="item">
                     <img :src="item" class="first-image">
@@ -21,7 +21,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="icon-2-body">
+            <div class="icon-2-body" v-if="!isLoading">
                 <div class="icon-2-body-left">
                     <div class="icon-2-main">
                         <h3 class="unit-title__name">{{DetailForm.HouseName}}</h3>
@@ -78,6 +78,10 @@
                         </div>
                         <div class="unit-layout__item" id="house_position">
                             <h5>房屋位置</h5>
+                            <div class="unit-description simple">
+                                {{DetailForm.traffic}}
+                            </div>
+
 
                         </div>
                         <div class="unit-layout__item" id="trading_rules">
@@ -146,11 +150,11 @@
                     <div class="calendar">
                         <Calendar v-on:getDate="getDate($event)"></Calendar>
                     </div>
-
-
-
-                    <button class="common__button">
+                    <button class="common__button" @click="gotoBook" v-if="!DetailForm.isOrder">
                         <span class="common__button_price">立刻预订（{{SelectDate.nightNum}}晚¥{{(SelectDate.nightNum * DetailForm.price) || 0}}）</span>
+                    </button>
+                    <button class="common__button_gray" v-else>
+                        <span class="common__button_price_gray">已经预定过啦！</span>
                     </button>
 
                 </div>
@@ -177,6 +181,9 @@
             return {
                 Image1src:'',
                 SelectDate:'',
+                oldOffset:0,
+                topOffset:0,
+                isLoading:false,
                 searchBarFixed:false,
                 DetailForm:{
                     HouseName:'',
@@ -294,44 +301,15 @@
             }
         },
         mounted(){
-            window.addEventListener('scroll', this.handleScroll)
+            window.addEventListener('scroll', this.handleScroll);
+        },
+        beforeDestroy(){
+            window.removeEventListener('scroll', this.handleScroll);
         },
         created() {
+            this.requiredStorg();
+            this.requiredHouse();
 
-            this.$api.get(this.$myconfig.hotelDetail + this.$route.params.hotelId,{
-                "token":localStorage.getItem("token")
-            },r=>{
-                console.log(r.data);
-                let data = r.data.hotel;
-                this.Image1src = '/image/' + data.hotelImage1;
-                this.DetailForm = {
-                    HouseName:data.name,
-                    address:data.address,
-                    HouseType:data.type,
-                    roomNum:parseInt(data.bedrooms) + parseInt(data.study),
-                    livingNum:data.drawingRoom,
-                    bathNum:data.bathroom,
-                    bedNum:data.bed,
-                    fitNum:data.suitablePopulation,
-                    HouseDescription:data.feature,
-                    deposit:data.deposit,
-                    hotelRule:data.hotelRule,
-                    price:data.price,
-                    HotelImageList:[
-                        this.$myconfig.ImageURL + data.hotelImage1,
-                        this.$myconfig.ImageURL + data.hotelImage2,
-                        this.$myconfig.ImageURL + data.hotelImage3,
-                        this.$myconfig.ImageURL + data.hotelImage4
-                    ]
-                };
-                this.ServicePush(data.facilityService);
-            },e=>{
-                console.log(e);
-            });
-
-            if (localStorage.getItem("SelectDate")){
-                this.SelectDate = JSON.parse(localStorage.getItem("SelectDate"));
-            }
         },
         methods:{
             ServicePush(data){
@@ -348,8 +326,67 @@
             },
             handleScroll(){
                 let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-                let offsetTop = document.querySelector('.icon-2-nav').offsetTop;
-                scrollTop > offsetTop ? this.searchBarFixed = true : this.searchBarFixed = false;
+                let leftOffset = document.querySelector('.icon-2-body-left').getBoundingClientRect().left;
+                if (scrollTop > 650) {
+                    this.searchBarFixed = true;
+                    document.querySelector('.icon-2-body-right').style.left = leftOffset + 800 + "px";
+                }else{
+                    this.searchBarFixed = false;
+                    document.querySelector('.icon-2-body-right').style.left =0;
+                }
+
+
+
+            },
+            requiredHouse(){
+                this.isLoading = true;
+                this.$api.post(this.$myconfig.hotelDetail,{
+                    "token":localStorage.getItem("token"),
+                    "selectStartDate":this.SelectDate.BeganTime,
+                    "selectEndDate":this.SelectDate.EndTime,
+                    "id":this.$route.params.hotelId
+                },r=>{
+                    console.log(r.data)
+
+                    let data = r.data.hotel;
+                    this.Image1src = '/image/' + data.hotelImage1;
+                    this.DetailForm = {
+                        HouseName:data.name,
+                        address:data.address,
+                        HouseType:data.type,
+                        roomNum:parseInt(data.bedrooms) + parseInt(data.study),
+                        livingNum:data.drawingRoom,
+                        bathNum:data.bathroom,
+                        bedNum:data.bed,
+                        fitNum:data.suitablePopulation,
+                        HouseDescription:data.feature,
+                        deposit:data.deposit,
+                        hotelRule:data.hotelRule,
+                        price:data.price,
+                        HotelImageList:[
+                            this.$myconfig.ImageURL + data.hotelImage1,
+                            this.$myconfig.ImageURL + data.hotelImage2,
+                            this.$myconfig.ImageURL + data.hotelImage3,
+                            this.$myconfig.ImageURL + data.hotelImage4
+                        ],
+                        isOrder:data.isOrder,
+                        traffic:data.traffic
+                    };
+                    this.ServicePush(data.facilityService);
+                    this.isLoading = false;
+
+                },e=>{
+                    console.log(e.data);
+
+                });
+            },
+            requiredStorg(){
+                if (localStorage.getItem("SelectDate")){
+                    this.SelectDate = JSON.parse(localStorage.getItem("SelectDate"));
+                }
+            },
+            gotoBook(){
+                this.$router.push({name:'orderInfo',query:{hotelId:this.$route.params.hotelId}})
             }
         }
     }
@@ -359,12 +396,10 @@
     .list-detail{
         background-color: #f5f5f5;
     }
-
     .top-image{
         width: 100%;
-
-
         height: 590px;
+        margin-top: 65px;
     }
     .first-image{
         height: 590px;
@@ -611,6 +646,25 @@
     .calendar{
         margin-top: 20px;
     }
+    .common__button_gray{
+        transition: .1s;
+        background-image: linear-gradient(-221deg,gray,lightgray);
+
+        -webkit-appearance: none;
+        text-align: center;
+        white-space: nowrap;
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        outline: none;
+        border: 0;
+        font-size: 16px;
+        margin-top: 20px;
+        color: #fff;
+    }
+
     .searchBarFixed{
         position: fixed;
         top:0;
@@ -618,7 +672,8 @@
     }
     .searchBarFixed2{
         position:fixed;
-        left: 60.8%;
+
+
 
         top:86px;
         z-index: 999;

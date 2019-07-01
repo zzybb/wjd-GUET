@@ -117,7 +117,6 @@
                 if (!this.cycle){
                     Time = getDate('yyyy-mm-dd',new Date());
                     this.today = Time;
-
                 }else{
                     Time = this.currYear + '-1';
                 }
@@ -134,6 +133,8 @@
                 this.nextMonthDays = this.getTotalDays(nextDate);
                 this.currBlankNum = this.getFirstDay(currDate);
                 this.nextBlankNum = this.getFirstDay(nextDate);
+                this.SetDefaultDate(this.currDay);
+
             },
             getTotalDays(time){
                 time = new Date(time);
@@ -218,7 +219,7 @@
             showCalendar(){
                 this.isShow = !this.isShow;
             },
-            HolidayProcessing(month,list){
+            HolidayProcessing(month,list){   //处理节假日，以及“今天”
 
                 for(var i = 0;i<list.length;i++){
                     var date = this.currYear + '-' + this.getZf(month) + '-' + this.getZf(list[i]);
@@ -276,7 +277,7 @@
 
             },
             haveDate(type,item){
-                if (this.SelectDate.currAttr=="complete"){
+                if (this.SelectDate.currAttr=="complete"){    //每一次点击会改变当前状态，当状态为完成，还要选时就清空所有数据重新开始计算。
                     this.SelectDate = {
                         BeganTime:'',
                         EndTime:'',
@@ -286,7 +287,7 @@
                 }
 
 
-                if (type == "current"){
+                if (type == "current"){                                  //'current代表的含义是点击左半边部分的日期项'
                     var date = this.AssembDate(type,item);
                     if (this.SelectDate.currAttr == "start"){
 
@@ -308,7 +309,7 @@
                     }
                 }
 
-                if (type == "next"){
+                if (type == "next"){                                      //'next'代表点击了右半边部分的日期项。
                     var date = this.AssembDate(type,item);
                     if (this.SelectDate.currAttr == "start"){
                         this.SelectDate.BeganTime = date;
@@ -395,6 +396,27 @@
                 }else if(d1.getTime() < d2.getTime()){
                     return -1;
                 }
+            },
+            isLastDayOfMonth(inputDate){
+                var d = new Date(inputDate.replace(/\-/, "/ "));
+                var nd = new Date(d.getTime()+24*60*60*1000); //next day
+                return (d.getMonth()!=nd.getMonth())
+
+            },
+            SetDefaultDate(currDay){
+                if (this.SelectDate.BeganTime != ''){
+                    return;
+                }
+                var currDate = getDate('yyyy-mm-dd',new Date());
+                if(this.isLastDayOfMonth(currDate)){   //判断是否是最后一天，如果是，则下一个日期从1号开始计算
+                    this.haveDate('currDate',currDay);
+                    this.haveDate('next',1);
+                }else{
+                    this.haveDate('current',currDay);
+                    this.haveDate('current',currDay + 1);
+                }
+
+
             }
         }
     }

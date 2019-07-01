@@ -4,9 +4,9 @@
             <h1>房屋照片<span>上传真实、漂亮的房屋照片更能吸引房客</span></h1>
         </div>
         <div class="ivu-form-item-content">
-            <el-form :label-position="labelPosition" status-icon label-width="80px" :model="PhotoForm"  ref="PhotoForm">
+            <el-form :label-position="labelPosition" status-icon label-width="80px" :model="PhotoForm"  ref="PhotoForm" :rules="rules">
                 <div class="g-img-info">
-                    <h1>照片需上传6-140张且满足以下类型:</h1>
+                    <h1>照片需上传4张且满足以下类型:</h1>
                     <div>
                         <p>
                             <span>卧室:1张</span>
@@ -26,22 +26,24 @@
                     </div>
                 </div>
                 <div class="upload-container">
-                    <el-upload
-                            :action="UploadURL"
-                            list-type="picture-card"
-                            :on-preview="handlePictureCardPreview"
-                            name="picture"
-                            :file-list="PhotoForm.bedRoomPhoto"
-                            :limit="1"
-                            :on-success="handleBedSuccess"
-                            :on-remove="removeBedSuccess"
-                            :before-upload="beforeAvatarUpload"
-                    >
-                        <i class="el-icon-plus"></i>
-                    </el-upload>
-                    <el-dialog :visible.sync="dialogVisible">
-                        <img width="100%" :src="dialogImageUrl" alt="">
-                    </el-dialog>
+                    <el-form-item prop="bedRoomPhoto">
+                        <el-upload
+                                :action="UploadURL"
+                                list-type="picture-card"
+                                :on-preview="handlePictureCardPreview"
+                                name="picture"
+                                :file-list="PhotoForm.bedRoomPhoto"
+                                :limit="1"
+                                :on-success="handleBedSuccess"
+                                :on-remove="removeBedSuccess"
+
+                        >
+                            <i class="el-icon-plus"></i>
+                        </el-upload>
+                        <el-dialog :visible.sync="dialogVisible">
+                            <img width="100%" :src="dialogImageUrl" alt="">
+                        </el-dialog>
+                    </el-form-item>
                 </div>
                 <div class="item-title">
                     <div class="item-title-left">
@@ -50,22 +52,23 @@
                     </div>
                 </div>
                 <div class="upload-container">
-                    <el-upload
-                            :action="UploadURL"
-                            list-type="picture-card"
-                            :on-preview="handlePictureCardPreview"
-                            :file-list="PhotoForm.bathRoomPhoto"
-                            name="picture"
-                            :limit="1"
-                            :on-success="handleBathSuccess"
-                            :on-remove="removeBathSuccess"
-                            :before-upload="beforeAvatarUpload"
-                    >
-                        <i class="el-icon-plus"></i>
-                    </el-upload>
-                    <el-dialog :visible.sync="dialogVisible">
-                        <img width="100%" :src="dialogImageUrl" alt="">
-                    </el-dialog>
+                    <el-form-item prop="bathRoomPhoto">
+                        <el-upload
+                                :action="UploadURL"
+                                list-type="picture-card"
+                                :on-preview="handlePictureCardPreview"
+                                :file-list="PhotoForm.bathRoomPhoto"
+                                name="picture"
+                                :limit="1"
+                                :on-success="handleBathSuccess"
+                                :on-remove="removeBathSuccess"
+                        >
+                            <i class="el-icon-plus"></i>
+                        </el-upload>
+                        <el-dialog :visible.sync="dialogVisible">
+                            <img width="100%" :src="dialogImageUrl" alt="">
+                        </el-dialog>
+                    </el-form-item>
                 </div>
                 <div class="item-title">
                     <div class="item-title-left">
@@ -74,22 +77,23 @@
                     </div>
                 </div>
                 <div class="upload-container">
-                    <el-upload
-                            :action="UploadURL"
-                            list-type="picture-card"
-                            :on-preview="handlePictureCardPreview"
-                            :file-list="PhotoForm.OtherPhoto"
-                            name="picture"
-                            :limit="2"
-                            :on-success="handleOtherSuccess"
-                            :on-remove="removeOtherSuccess"
-                            :before-upload="beforeAvatarUpload"
-                    >
-                        <i class="el-icon-plus"></i>
-                    </el-upload>
-                    <el-dialog :visible.sync="dialogVisible">
-                        <img width="100%" :src="dialogImageUrl" alt="">
-                    </el-dialog>
+                    <el-form-item prop="OtherPhoto">
+                        <el-upload
+                                :action="UploadURL"
+                                list-type="picture-card"
+                                :on-preview="handlePictureCardPreview"
+                                :file-list="PhotoForm.OtherPhoto"
+                                name="picture"
+                                :limit="2"
+                                :on-success="handleOtherSuccess"
+                                :on-remove="removeOtherSuccess"
+                        >
+                            <i class="el-icon-plus"></i>
+                        </el-upload>
+                        <el-dialog :visible.sync="dialogVisible">
+                            <img width="100%" :src="dialogImageUrl" alt="">
+                        </el-dialog>
+                    </el-form-item>
                 </div>
                 <next-step :form="ThisForm"></next-step>
             </el-form>
@@ -104,18 +108,40 @@
         name: "HomePhoto",
         components: {NextStep},
         data(){
+            var PhotoRoomPass = (rule,value,callback) => {
+                if (!value[0]){
+                    return callback(new Error('图片不能为空'));
+                }else{
+                    callback();
+                }
+            };
             return {
                 labelPosition:'top',
                 requiredURL:this.$myconfig.ImageURL,
-                UploadURL:this.$myconfig.photoUpLoad,
                 PhotoForm:{
                     bedRoomPhoto:[],
                     bathRoomPhoto:[],
                     OtherPhoto:[],
                 },
+                rules:{                //校验规则
+                    bedRoomPhoto:[
+                        {validator: PhotoRoomPass},
+                    ],
+                    OtherPhoto:[
+                        {validator: PhotoRoomPass}
+                    ],
+                    bathRoomPhoto:[
+                        {validator: PhotoRoomPass},
+                    ]
+                },
                 ThisForm:{},
                 dialogVisible:false,
                 dialogImageUrl:''
+            }
+        },
+        computed:{
+            UploadURL:function(){
+                return this.$myconfig.ServerPath + this.$myconfig.photoUpLoad
             }
         },
         methods:{
@@ -124,26 +150,31 @@
                 this.dialogImageUrl = file.url;
                 this.dialogVisible = true;
             },
-            handleBedSuccess(res,file,fileList){
+            handleBedSuccess(res,file){
+
+                if (res.code != 200){
+                    this.$message.error("登录失效，请重新登录");
+                    this.$router.push({name:'loginPage'})
+                }
                 var url = this.requiredURL+res.msg;
                 this.PhotoForm.bedRoomPhoto.push({name:file.name,url:url})
+                this.$refs['PhotoForm'].validateField('bedRoomPhoto');
 
             },
-            handleBathSuccess(res,file,fileList){
+            handleBathSuccess(res,file){
 
                 var url = this.requiredURL+res.msg;
                 this.PhotoForm.bathRoomPhoto.push({name:file.name,url:url})
+                this.$refs['PhotoForm'].validateField('bathRoomPhoto');
             },
-            handleOtherSuccess(res,file,fileList){
-
+            handleOtherSuccess(res,file){
                 var url = this.requiredURL+res.msg;
-
                 this.PhotoForm.OtherPhoto.push({name:file.name,url:url})
+                this.$refs['PhotoForm'].validateField('OtherPhoto');
             },
             removeBedSuccess(file,fileList){
                 console.log(file,fileList)
                 this.WhereRemoveFile(file.name,this.PhotoForm.bedRoomPhoto);
-
             },
             removeBathSuccess(file){
                 //this.PhotoForm.bathRoomPhoto = fileList
@@ -168,10 +199,7 @@
                     let height = 1080;
                     let _URL = window.URL || window.webkitURL;
                     let img = new Image();
-                    img.onload = function() {
-                        let valid = img.width >= width && img.height >= height;
-                        valid ? resolve() : reject();
-                    }
+
                     img.src = _URL.createObjectURL(file);
                 }).then(() => {
                     return file;

@@ -1,12 +1,11 @@
 <template>
     <div class="searchBox">
         <div class="nav">
-            <input type="text" placeholder="桂林" class="city" v-model="palceName" >
+            <input type="text" placeholder="请输入城市" class="city" v-model="palceName" >
             <Calendar v-on:getDate="getDate($event)"></Calendar>
             <input type="button" src="" value="搜索" class="choose" @click="showSearchLay1">
         </div>
     </div>
-
 </template>
 <script>
 
@@ -16,17 +15,24 @@
         components: {Calendar},
         data(){
             return {
-                palceName:[]
+                palceName:''
             }
         },
-
+        created(){
+            this.palceName = localStorage.getItem("palceName");
+        },
         methods:{
             showSearchLay1:function(){
-                var Select = JSON.parse(localStorage.getItem("SelectDate"));
                 localStorage.setItem("palceName", this.palceName);
-                this.$router.replace('/unitList');
+                if (this.$route.name == 'home'){
+                    this.$router.push({ path: 'unitList' });
+                }else if(this.$route.name == 'unitList'){
+                    this.$emit("UpdateList");
 
-                this.$api.get(this.$myconfig.hotelList,{
+                }
+
+
+                /*this.$api.get(this.$myconfig.hotelList,{
                         "token":localStorage.getItem("token"),
                         "city":localStorage.getItem("palceName"),
                         "selectStartDate":Select.BeganTime,
@@ -39,7 +45,7 @@
 
                     },failure=>{
                         console.log("登录失败，失败原因：" + failure.data)
-                    })
+                    })*/
 
 
 

@@ -6,12 +6,12 @@
                 <span> 企业会员注册</span>
             </div>
             <div class="register-left-input">
-                <input type="text" placeholder="请输入手机号" id="mobile" v-model="mobile">
-                <input type="text" placeholder="请输入验证码" id="verifyCodePic" >
-                <img src="../assets/register/VerifyImage.jpg">
+                <input type="text" placeholder="请输入注册手机号" id="mobile" v-model="mobile">
+                <input type="text" placeholder="请输入验证码" id="verifyCodePic" v-model="captcha">
+                <img :src="cachePath">
 
 
-                <input type="text" placeholder="登录密码" id="password" v-model="password">
+                <input type="text" placeholder="注册密码" id="password" v-model="password">
                 <button v-on:click="inputRegister">注册</button>
             </div>
         </div>
@@ -24,19 +24,49 @@
         data(){
             return {
                 mobile:'',
-                password:''
+                password:'',
+                cachePath:'',
+                captcha:'',
+                uuid:''
             }
         },
+        created(){
+            this.getCapth();
+        },
         methods:{
+            getUUID() {
+                this.uuid =  'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+                    return (c === 'x' ? (Math.random() * 16 | 0) : ('r&0x3' | '0x8')).toString(16)
+                })
+
+                return this.uuid;
+            },
             inputRegister(){
                 this.$api.post(this.$myconfig.register,{
                     mobile:this.mobile,
-                    password:this.password
+                    password:this.password,
+                    captcha:this.captcha,
+                    uuid:this.uuid
                 },success=>{
-                    console.log(success.data);
+                    if (success.data.msg != 'success'){
+                        this.$message.error(success.data.msg);
+                        this.getCapth();
+                    } else{
+                        this.$message({
+                            message: '注册成功',
+                            type: 'success'
+                        });
+                        this.$router.push({name:'loginPage'});
+
+                    }
+
+
                 },failure=>{
                     console.log("注册失败，失败原因：" + failure.data)
                 })
+            },
+            getCapth(){
+                this.cachePath = this.$myconfig.ServerPath +  "wjd/app/captcha.jpg?uuid=" + this.getUUID();
             }
         }
     }
@@ -110,6 +140,8 @@
     }
 
     .register-content-left img{
+        width: 130px;
+        height: 42px;
         margin-top:30px;
         margin-left: 15px;
     }

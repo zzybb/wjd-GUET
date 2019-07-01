@@ -17,7 +17,7 @@
         word-spacing: 1em;
         line-height: 2em;
         height:150px;
-        width:1920px;
+        width:100%;
         margin:0;
         padding-top:40px;
         background-color: #f7f7f7;

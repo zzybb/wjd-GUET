@@ -10,15 +10,15 @@
                 <div class="price-container">
                     <el-form-item label="售卖价格" prop="price">
                         <div class="input-price">
-                            <el-input v-model="PriceForm.price"></el-input>
+                            <el-input v-model.number="PriceForm.price"></el-input>
                             &nbsp;&nbsp;
                             <span>元</span>
                         </div>
                     </el-form-item>
                     <el-form-item label="支付押金" prop="deposit">
                         <div class="input-price">
-                            <el-input v-model="PriceForm.deposit"></el-input>
-                            &nbsp;&nbsp;
+                            <el-input v-model.number="PriceForm.deposit"></el-input>
+                            &nbsp;&nbsp
                             <span>元</span>
                         </div>
                     </el-form-item>
@@ -44,10 +44,12 @@
                 },
                 rules:{
                     price:[
-                        {required:true,message:'请输入价格',trigger:'blur'}
+                        {required:true,message:'请输入价格',trigger:'blur'},
+                        { type: 'number', message: '售卖价格必须为数字值'}
                     ],
                     deposit:[
-                        {required:true,message:'请输入押金',trigger:'blur'}
+                        {required:true,message:'请输入押金',trigger:'blur'},
+                        { type: 'number', message: '支付押金必须为数字值'}
                     ]
                 }
             }

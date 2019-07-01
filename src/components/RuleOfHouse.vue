@@ -70,12 +70,12 @@
                         </el-form-item>
                     </div>
                 </el-form-item>
-
                 <next-step :form="ThisForm"></next-step>
             </el-form>
         </div>
     </div>
 </template>
+
 
 <script>
     import NextStep from "./nextStep";

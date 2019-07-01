@@ -144,12 +144,9 @@
                 time.setDate(0);
                 /* 返回当月的天数 */
                 day = time.getDate();
-
                 for(;i<=day;i++){
                     days.push(i);
                 }
-
-
                 this.HolidayProcessing(curMonth,days);
                 return days;
             },
@@ -161,7 +158,6 @@
             getSumDate(type,time){
                 var re = /-/g,
                     list = time.split(re);
-
                 var month = parseInt(list[1]);
                 if (type == 'next') {
                     var m1 = month + 1+this.currPage;
@@ -196,7 +192,6 @@
                     this.currMonth = 1;
                     this.nextMonth = 1;
                     this.currPage = -1;
-
                     this.cycle++;
                 }
 
@@ -340,7 +335,6 @@
             },
             isBegan(type,num){
                 var date = this.AssembDate(type,num);
-
                 if (date == this.SelectDate.BeganTime){
                     return true;
                 } else{
@@ -349,28 +343,26 @@
             },
             isLeft(type,num){
                 var date = this.AssembDate(type,num);
-
                 if (date == this.SelectDate.EndTime){
                     return true;
                 } else{
                     return false;
                 }
-
             },
             AssembDate(type,num){      //对当前页和下一页选中的日期进行组装
                 var year,month,day,date;
                 if(type == 'current'){
                     year = this.currYear;
-                    month = this.currMonth;
-                    day = num;
-                    date = year + '-' + month + '-' +num;
+                    month = this.getZf(this.currMonth);
+                    day = this.getZf(num);
+                    date = year + '-' + month + '-' +day;
                 }
 
                 if (type == 'next') {
                     year = this.nextYear;
-                    month = this.nextMonth;
-                    day = num;
-                    date = year + '-' + month + '-' +num;
+                    month = this.getZf(this.nextMonth);
+                    day = this.getZf(num);
+                    date = year + '-' + month + '-' +day;
                 }
 
                 return date;

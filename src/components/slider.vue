@@ -30,7 +30,6 @@
         data(){
             return {
                 isLogin:false
-
             }
         },
         created(){

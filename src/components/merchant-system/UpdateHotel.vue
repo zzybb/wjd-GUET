@@ -321,7 +321,7 @@
                             v-model="selectDate.startDate"
                             type="date"
                             placeholder="选择出售开始时间"
-                            value-format="yyyy-M-d"
+                            value-format="yyyy-MM-dd"
                     >
                     </el-date-picker>
                     &nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;
@@ -329,7 +329,7 @@
                             v-model="selectDate.endDate"
                             type="date"
                             placeholder="选择出售结束时间"
-                            value-format="yyyy-M-d"
+                            value-format="yyyy-MM-dd"
                     >
                     </el-date-picker>
                 </div>

@@ -1,8 +1,11 @@
 <template>
     <div class="slide-nav">
         <div class="order-nav-body">
-            <img src="../assets/home/logo.png" class="navLogo">
-            <span class="logoFont">微酒店</span>
+            <div class="order-nav-logo">
+
+                <span class="logoFont">微酒店</span>
+            </div>
+
             <div class="nav-select">
                 <router-link  :to="{name:'home'}" class="select-item" :class="activeObj('首页')">首页</router-link>
                 <span class="select-item" :class="activeObj('发现')">发现</span>
@@ -13,27 +16,25 @@
             </div>
 
             <div class="nav-select-2" v-else>
-                <router-link :to="{name:'manageSystem'}" class="select-item-2-long" :class="activeObj('商户系统')">商户系统</router-link>
+                <router-link :to="{name:'manageSystem'}" class="select-item-2-long" :class="activeObj('商户系统')" v-if="isShowMerchant">商户系统</router-link>
                 <router-link :to="{name:'clientSystem'}" class="select-item-2-long" :class="activeObj('我的途家')">我的途家</router-link>
                 <a class="select-item-2-long" @click="exitLogin">退出登录</a>
             </div>
-
-
         </div>
-
     </div>
-
 </template>
 <script>
     export default {
         name: "slider",
         data(){
             return {
-                isLogin:false
+                isLogin:false,
+                isShowMerchant:false
             }
         },
         created(){
             this.judgeLogin();
+
         },
         methods:{
             activeObj(type){
@@ -49,11 +50,29 @@
                 }
             },
             judgeLogin(){
-                if (localStorage.getItem("token") == null){
+                if (localStorage.getItem("isHotel") != null){
+                    parseInt(localStorage.getItem("isHotel")) == 1? this.isShowMerchant = true : this.isShowMerchant = false;
+                }else{
+                    this.requiredHaveHotel();
+                }
+
+
+                if (localStorage.getItem("token") == null){   //判断显示是否登录的
                     this.isLogin = false;
                 } else {
                     this.isLogin = true;
                 }
+            },
+            requiredHaveHotel(){
+                this.$api.get(this.$myconfig.getUserInfo,{},r=>{
+                    if (!r.data.user){
+                        throw new Error();
+                    }
+                    r.data.user.isHotel == 1 ? this.isShowMerchant = true: this.isShowMerchant = false;
+                    localStorage.setItem("isHotel",r.data.user.isHotel);
+                },err=>{
+                    console.log(err.data);
+                })
             },
             exitLogin(){
                 localStorage.removeItem("token");
@@ -81,11 +100,7 @@
         box-shadow: 0 0 8px #cfcfcf;
         display: flex;
         align-items: center;
-    }
 
-    .navLogo{
-        margin-left: 200px;
-        width: 60px;
     }
 
     .logoFont{
@@ -95,11 +110,23 @@
         font-family: 幼圆;
         letter-spacing: 3px;
     }
-    .nav-select{
-
+    .order-nav-logo{
+        display: flex;
+        align-items: center;
+        background-image: url("../assets/home/logo.png");
+        background-repeat: no-repeat;
+        background-size: 55px;
+        background-position: 0 50%;
         width: 120px;
         height: 60px;
-        margin-left: 200px;
+        padding-left: 60px;
+        margin-left: 250px;
+        min-width: 120px;
+    }
+    .nav-select{
+        width: 120px;
+        height: 60px;
+        margin-left: 220px;
         display: flex;
         align-items: center;
         justify-content: space-around;

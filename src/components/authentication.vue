@@ -204,7 +204,6 @@
             },
             ReorganDetail(obj){
                 var Form = JSON.parse(localStorage.getItem("DetailForm"));
-
                 var DetailForm = {
                     "rentWay":Form.TypeOfRental,                          //出租方式
                     "area":Form.size,                                     //房屋面积
@@ -217,11 +216,11 @@
                     "study":Form.HouseDetailNum.BookRoom,                 //书房数量
                     "balcony":Form.HouseDetailNum.balcony,                //阳台数量
                     "bed":Form.bedNum,                                    //床的数量
-                    "suitablePopulation":Form.fitNum,                     //适合住的人数
+                    "suitablePopulation":Form.fitNum.toString(),          //适合住的人数
                     "housingQuantity":Form.HouseNum                       //房子数量
                 }
 
-                this.toStr(DetailForm);
+
                 Object.assign(obj,DetailForm);
             },
             ReorganDescription(obj){

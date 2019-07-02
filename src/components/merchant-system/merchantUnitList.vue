@@ -42,9 +42,6 @@
                 >
                 </el-pagination>
             </div>
-
-
-
         </div>
         <div class="none-house-box" v-if="!haveHouse">
             <div class="no-house">
@@ -87,7 +84,6 @@
                         throw new Error();
                     }
                     this.HouseList = success.data.list;
-                    
                     this.HouseList.length == 0 ? this.haveHouse = false : this.haveHouse = true;
                     this.handlePageChange(1);
                     this.isLoading = false;

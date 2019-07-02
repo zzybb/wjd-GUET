@@ -60,6 +60,7 @@
             }),
             requiredOrder(){
                 this.isLoading = true;
+                this.changeComId(2);
                 this.$api.get(this.$myconfig.GetOrder + this.$route.query.orderId,{},r=>{
                     var order = r.data.hotelOrder;
 

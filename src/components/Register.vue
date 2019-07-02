@@ -11,7 +11,7 @@
                 <img :src="cachePath">
 
 
-                <input type="text" placeholder="注册密码" id="password" v-model="password">
+                <input type="password" placeholder="注册密码" id="password" v-model="password">
                 <button v-on:click="inputRegister">注册</button>
             </div>
         </div>

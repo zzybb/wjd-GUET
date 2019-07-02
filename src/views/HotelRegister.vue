@@ -1,9 +1,9 @@
 <template>
     <div id="Hotel-register">
-        <merchant-nav></merchant-nav>
+        <slider></slider>
 
         <div class="Hotel-register-body">
-            <h1>哪些房屋可以在途家网出租</h1>
+            <h1>哪些房屋可以在微酒店出租</h1>
                 <ul class="Hotel-type">
                     <li><img src="../assets/merchant-register/houseType01.jpg">
                         <div class="i-type01"><span>公寓</span></div>
@@ -41,15 +41,17 @@
     </div>
 </template>
 <script>
-    import MerchantNav from "../components/merchantNav";
+
+    import Slider from "../components/slider";
     export default {
-        components: {MerchantNav}
+        components: {Slider}
     }
 </script>
 <style scoped>
 
     .Hotel-register-body{
         height: 500px;
+        padding-top: 40px;
 
     }
 

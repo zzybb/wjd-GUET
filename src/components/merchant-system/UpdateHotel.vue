@@ -89,7 +89,7 @@
                         </el-form-item>
 
                         <el-form-item label="宜住人数" prop="fitNum">
-                            <el-input-number v-model="DetailForm.fitNum" controls-position="right"  :min="1" :max="4" size="mini"></el-input-number>
+                            <el-input-number v-model="DetailForm.fitNum" controls-position="right"  :min="1" :max="6" size="mini"></el-input-number>
                         </el-form-item>
                         <el-form-item label="同类房数量" prop="HouseNum">
                             <div class="info-HouseNum">
@@ -558,7 +558,6 @@
         },
         created(){
             this.requiredHouse();
-
         },
         computed:{
             TimeLine:function(){
@@ -572,7 +571,6 @@
             HowLongSweep:function(){
                 var sweep=[];
                 for(var i = 1;i<=7;i++){
-
                     sweep.push(i+"天1扫");
                 }
                 return sweep;
@@ -615,7 +613,6 @@
                 }
             },
             slotPSForm(hotel){
-
                 this.PositionForm = {
                     city:[hotel.provincial,hotel.city,hotel.street],
                     address:hotel.address,
@@ -793,14 +790,10 @@
                     "address":Form.address,                               //地址
                     "addressSupplement":Form.addressSupplement            //地址补充
                 };
-
                 Object.assign(obj,PositionForm);
-
-
             },
             ReorganDetail(obj){
                 var Form = this.DetailForm;
-
                 var DetailForm = {
                     "rentWay":Form.TypeOfRental,                          //出租方式
                     "area":Form.size,                                     //房屋面积
@@ -813,7 +806,7 @@
                     "study":Form.HouseDetailNum.BookRoom,                 //书房数量
                     "balcony":Form.HouseDetailNum.balcony,                //阳台数量
                     "bed":Form.bedNum,                                    //床的数量
-                    "suitablePopulation":Form.fitNum,                     //适合住的人数
+                    "suitablePopulation":Form.fitNum.toString(),          //适合住的人数
                     "housingQuantity":Form.HouseNum                       //房子数量
                 }
 
@@ -881,7 +874,7 @@
                 var Date = {
                     "startDate":Form.startDate,
                     "endDate":Form.endDate
-                }
+                };
 
                 Object.assign(obj,Date);
             },
@@ -998,7 +991,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index:3300;
+        z-index:100;
 
     }
     .input-form{

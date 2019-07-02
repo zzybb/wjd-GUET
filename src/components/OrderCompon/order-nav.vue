@@ -17,13 +17,11 @@
 
 <script>
     import { createNamespacedHelpers } from 'vuex'
-
     const { mapState } = createNamespacedHelpers('Order');
     export default {
         name: "order-nav",
         data(){
             return {
-
             }
         },
         computed:{

@@ -10,13 +10,13 @@
                     <Calendar v-on:getDate="getDate($event)"></Calendar>
                     <span class="night">共{{SelectDate.nightNum}}晚</span>
                 </div>
-                <el-form v-model="baseInfo" label-width="80px">
-                    <el-form-item label="预定数量:">
+                <el-form :model="baseInfo" label-width="80px" :rules="rules" ref="baseInfoForm">
+                    <el-form-item label="预定数量:" prop="number">
                         <el-select v-model="baseInfo.number" placeholder="预定数量">
                             <el-option :label="item" :value="item" v-for="item in 1"></el-option>
                         </el-select>
                     </el-form-item>
-                    <el-form-item label="入住人数:">
+                    <el-form-item label="入住人数:" prop="peopleNumber">
                         <el-select v-model="baseInfo.peopleNumber" placeholder="入住人数">
                             <el-option :label="item" :value="item" v-for="item in Maxpeople"></el-option>
                         </el-select>
@@ -29,22 +29,20 @@
                 <span class="col-title">入住人信息</span>
             </div>
             <div class="order-info-main">
-                <el-form v-model="peopleInfo" label-width="80px">
-                    <el-form-item >
-                        <el-radio-group v-model="baseInfo.idType">
-                            <el-radio label="身份证"></el-radio>
+                <el-form :model="peopleInfo" label-width="80px" :rules="rules" ref="peopleInfoForm">
+                    <el-form-item prop="idType">
+                        <el-radio-group v-model="peopleInfo.idType">
+                            <el-radio label="身份证" ></el-radio>
                             <el-radio label="居住证" disabled></el-radio>
                         </el-radio-group>
-
-
                     </el-form-item>
-                    <el-form-item label="姓名:">
+                    <el-form-item label="姓名:" prop="realName">
                         <el-input v-model="peopleInfo.realName"></el-input>
                     </el-form-item>
-                    <el-form-item label="手机:">
-                        <el-input v-model="peopleInfo.tel"></el-input>
+                    <el-form-item label="手机:" prop="tel">
+                        <el-input v-model.number="peopleInfo.tel"></el-input>
                     </el-form-item>
-                    <el-form-item label="证件:">
+                    <el-form-item label="证件:" prop="idNumber">
                         <el-input v-model="peopleInfo.idNumber"></el-input>
                     </el-form-item>
                 </el-form>
@@ -65,7 +63,6 @@
 <script>
     import Calendar from "../Calendar";
     import { createNamespacedHelpers } from 'vuex'
-
     const { mapMutations } = createNamespacedHelpers('Order');
     export default {
         name: "order-body",
@@ -88,12 +85,35 @@
                     peopleNumber:'',
                     money:0,
                     isPay:0,
-                    idType:''
+                },
+                rules:{                //校验规则
+                    number:[
+                        {required:true,message:'请选择预定数量',trigger: ['blur', 'change']}
+                    ],
+                    peopleNumber:[
+                        {required:true,message:'请选择入住人数',trigger: ['blur', 'change']}
+                    ],
+                    idType:[
+                        {required:true,message:'请选择证件类型',trigger: ['blur', 'change']}
+                    ],
+                    realName:[
+                        {required:true,message:'请输入真实姓名',trigger: ['blur', 'change']}
+                    ],
+                    tel:[
+                        {required:true,message:'请输入电话号码',trigger: ['blur', 'change']},
+                        { type: 'number', message: '电话必须为数字值'}
+                    ],
+                    idNumber:[
+                        {required:true,message:'请输入证件号码',trigger: ['blur', 'change']},
+                    ]
+
+
                 },
                 peopleInfo:{
                     realName:'',
                     tel:'',
-                    idNumber:''
+                    idNumber:'',
+                    idType:''
                 }
             }
         },
@@ -122,6 +142,7 @@
                 this.changeNight(event.nightNum);
             },
             requiredStorg(){
+                this.changeComId(1);
                 if (localStorage.getItem("SelectDate")){
                     this.SelectDate = JSON.parse(localStorage.getItem("SelectDate"));
                 }
@@ -131,9 +152,31 @@
                 Object.assign(obj,this.peopleInfo);
                 obj["money"] = this.SelectDate.nightNum * this.hotelInfo.price;
                 obj["id"] = this.hotelInfo.id;
-                obj["hotelId"] = this.$route.query.hotelId
+                obj["hotelId"] = this.$route.query.hotelId;
+                obj["tel"] = obj["tel"].toString();
+
             },
             SubmitOrder(){
+                console.log(this.$refs["baseInfoForm"])
+                this.$refs["baseInfoForm"].validate((valid) => {
+                    if (valid) {
+
+                    } else {
+                        console.log('表单有未填写项');
+
+                        return false;
+                    }
+                });
+                this.$refs["peopleInfoForm"].validate((valid) => {
+                    if (valid) {
+                        this.organInfo();
+                    } else {
+                        console.log('表单有未填写项');
+                        return false;
+                    }
+                });
+            },
+            organInfo(){
                 var obj = {};
                 this.ReorganInfo(obj);
                 this.changeInfo(obj);
@@ -155,6 +198,9 @@
 </script>
 
 <style scoped>
+    /deep/ .el-form-item__label{
+        width: 95px !important;
+    }
 
     .order-body{
         margin: 0 auto;

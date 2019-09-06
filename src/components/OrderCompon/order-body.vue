@@ -151,7 +151,6 @@
                 Object.assign(obj,this.baseInfo);
                 Object.assign(obj,this.peopleInfo);
                 obj["money"] = this.SelectDate.nightNum * this.hotelInfo.price;
-                obj["id"] = this.hotelInfo.id;
                 obj["hotelId"] = this.$route.query.hotelId;
                 obj["tel"] = obj["tel"].toString();
 
